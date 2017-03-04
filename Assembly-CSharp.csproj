@@ -47,8 +47,12 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Agent.cs" />
+     <Compile Include="Assets\Scripts\Bob States\CreateState.cs" />
+     <Compile Include="Assets\Scripts\Bob States\WaitState.cs" />
      <Compile Include="Assets\Scripts\Bob.cs" />
-     <Compile Include="Assets\Scripts\CreateState.cs" />
+     <Compile Include="Assets\Scripts\Elsa States\ElsaCreatestate.cs" />
+     <Compile Include="Assets\Scripts\Elsa States\ElsaWaitState.cs" />
+     <Compile Include="Assets\Scripts\Elsa.cs" />
      <Compile Include="Assets\Scripts\LeanPool\Examples\SimpleDelayedPooling.cs" />
      <Compile Include="Assets\Scripts\LeanPool\Examples\SimplePoolBenchmark.cs" />
      <Compile Include="Assets\Scripts\LeanPool\Examples\SimplePooling.cs" />
@@ -56,10 +60,13 @@
      <Compile Include="Assets\Scripts\LeanPool\Scripts\LeanPool.cs" />
      <Compile Include="Assets\Scripts\LeanPool\Scripts\LeanPooledRigidbody.cs" />
      <Compile Include="Assets\Scripts\LeanPool\Scripts\LeanPooledRigidbody2D.cs" />
+     <Compile Include="Assets\Scripts\Outlaw States\LurkInCamp.cs" />
+     <Compile Include="Assets\Scripts\Outlaw States\LurkInCemetery.cs" />
+     <Compile Include="Assets\Scripts\Outlaw States\RobBank.cs" />
+     <Compile Include="Assets\Scripts\Outlaw.cs" />
      <Compile Include="Assets\Scripts\State.cs" />
      <Compile Include="Assets\Scripts\StateMachine.cs" />
      <Compile Include="Assets\Scripts\Tiles.cs" />
-     <Compile Include="Assets\Scripts\WaitState.cs" />
  <Reference Include="UnityEngine.Analytics">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
