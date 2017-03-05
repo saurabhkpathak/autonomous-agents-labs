@@ -8,10 +8,10 @@ using Lean; //from Unity asset "LeanPool" - freely available in the Asset Store;
 public class TilingSystem : MonoBehaviour {
 
 	[SerializeField]
-	private GameObject TilePrefab;
+	private GameObject[] TilePrefabs;
 
 	public float getTileSize() {
-		return TilePrefab.GetComponent<SpriteRenderer> ().sprite.bounds.size.x;
+		return TilePrefabs[0].GetComponent<SpriteRenderer> ().sprite.bounds.size.x;
 	}
 
 	public List<TileSprite> TileSprites;
@@ -35,17 +35,30 @@ public class TilingSystem : MonoBehaviour {
 	//set the tiles of the map to what is specified in TileSprites
 	private void SetTiles() {
 
+		string[] gridData = new string[] {
+			"0101100010101",
+			"0000010101010",
+			"0001000101001",
+			"0100110011000",
+			"1000100000010",
+			"0101010100101"
+		};
+
+		int mapX = gridData [0].ToCharArray ().Length;
+		int mapY = gridData.Length;
+
 		Vector3 gridStart = Camera.main.ScreenToWorldPoint (new Vector3 (0, Screen.height));
 
-		for (int y = 0; y < 5; y++) {
-			for (int x = 0; x < 5; x++) {
-				PlaceTile (x, y, gridStart);
+		for (int y = 0; y < mapY; y++) {
+			char[] rowTiles = gridData [y].ToCharArray ();
+			for (int x = 0; x < mapX; x++) {
+				PlaceTile (rowTiles[x].ToString(), x, y, gridStart);
 			}
 		}
 	}
 
-	private void PlaceTile(int x, int y, Vector3 gridStart) {
-		GameObject newTile = Instantiate (TilePrefab);
+	private void PlaceTile(string tileType, int x, int y, Vector3 gridStart) {
+		GameObject newTile = Instantiate (TilePrefabs[int.Parse(tileType)]);
 		newTile.transform.position = new Vector3 (gridStart.x + (getTileSize() * x), gridStart.y - (getTileSize() * y), 0);
 	}
 
