@@ -2,16 +2,20 @@
 using UnityEngine;
 using System.Collections;
 
-[Serializable]
-public class TileSprite : MonoBehaviour {
+[System.Serializable]
+public class TileSprite {
 
-	//define what atributes a tile has
-	// ...
+	public int movementCost;
+	public Tiles tileType;
+	public GameObject tilePrefab;
 
 	public TileSprite() {
-		
-		// initialize a default tile
-		// ...
+		this.movementCost = 0;
+		this.tileType = Tiles.Plains;
+	}
 
+	public TileSprite(int cost, Tiles type) {
+		this.movementCost = cost;
+		this.tileType = type;
 	}
 }

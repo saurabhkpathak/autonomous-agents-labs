@@ -7,29 +7,28 @@ using Lean; //from Unity asset "LeanPool" - freely available in the Asset Store;
 
 public class TilingSystem : MonoBehaviour {
 
-	[SerializeField]
-	private GameObject[] TilePrefabs;
+	public TileSprite[] TileSprites;
+	public Vector2 MapSize;
+	private TileSprite[,] _map;
 
 	public float getTileSize() {
-		return TilePrefabs[0].GetComponent<SpriteRenderer> ().sprite.bounds.size.x;
+		return TileSprites[0].tilePrefab.GetComponent<SpriteRenderer> ().sprite.bounds.size.x;
 	}
 
-//	public List<TileSprite> TileSprites;
-//	public Vector2 MapSize;
 //	public Sprite DefaultImage;
 //	public GameObject TileContainerPrefab;
 //	public Vector2 CurrentPosition;
 //	public Vector2 ViewPortSize;
-//
-//	private TileSprite[,] _map;
 //	private GameObject _tileContainer;
 //	private List<GameObject> _tiles = new List<GameObject>();
 
 	//create a map of size MapSize of unset tiles
 	private void DefaultTiles() {
-		
-		//....
-		
+		for (int i = 0; i < MapSize.x; i++) {
+			for (int j = 0; j < MapSize.y; j++) {
+				_map [i,j] = new TileSprite ();
+			}
+		}
 	}
 
 	//set the tiles of the map to what is specified in TileSprites
@@ -44,21 +43,18 @@ public class TilingSystem : MonoBehaviour {
 			"0101010100101"
 		};
 
-		int mapX = gridData [0].ToCharArray ().Length;
-		int mapY = gridData.Length;
-
 		Vector3 gridStart = Camera.main.ScreenToWorldPoint (new Vector3 (0, Screen.height));
 
-		for (int y = 0; y < mapY; y++) {
+		for (int y = 0; y < MapSize.y; y++) {
 			char[] rowTiles = gridData [y].ToCharArray ();
-			for (int x = 0; x < mapX; x++) {
+			for (int x = 0; x < MapSize.x; x++) {
 				PlaceTile (rowTiles[x].ToString(), x, y, gridStart);
 			}
 		}
 	}
 
 	private void PlaceTile(string tileType, int x, int y, Vector3 gridStart) {
-		GameObject newTile = Instantiate (TilePrefabs[int.Parse(tileType)]);
+		GameObject newTile = Instantiate (TileSprites[int.Parse(tileType)].tilePrefab);
 		newTile.transform.position = new Vector3 (gridStart.x + (getTileSize() * x), gridStart.y - (getTileSize() * y), 0);
 	}
 
@@ -101,7 +97,7 @@ public class TilingSystem : MonoBehaviour {
 //	}
 
 	public void Start() {
-		//_map = new TileSprite[(int)MapSize.x, (int)MapSize.y];
+		_map = new TileSprite[(int)MapSize.x, (int)MapSize.y];
 		SetTiles ();
 		//AddTilesToMap ();
 	}
