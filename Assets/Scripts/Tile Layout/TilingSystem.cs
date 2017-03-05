@@ -14,16 +14,16 @@ public class TilingSystem : MonoBehaviour {
 		return TilePrefabs[0].GetComponent<SpriteRenderer> ().sprite.bounds.size.x;
 	}
 
-	public List<TileSprite> TileSprites;
-	public Vector2 MapSize;
-	public Sprite DefaultImage;
-	public GameObject TileContainerPrefab;
-	public Vector2 CurrentPosition;
-	public Vector2 ViewPortSize;
-
-	private TileSprite[,] _map;
-	private GameObject _tileContainer;
-	private List<GameObject> _tiles = new List<GameObject>();
+//	public List<TileSprite> TileSprites;
+//	public Vector2 MapSize;
+//	public Sprite DefaultImage;
+//	public GameObject TileContainerPrefab;
+//	public Vector2 CurrentPosition;
+//	public Vector2 ViewPortSize;
+//
+//	private TileSprite[,] _map;
+//	private GameObject _tileContainer;
+//	private List<GameObject> _tiles = new List<GameObject>();
 
 	//create a map of size MapSize of unset tiles
 	private void DefaultTiles() {
@@ -101,8 +101,7 @@ public class TilingSystem : MonoBehaviour {
 //	}
 
 	public void Start() {
-		_map = new TileSprite[(int)MapSize.x, (int)MapSize.y];
-		DefaultTiles ();
+		//_map = new TileSprite[(int)MapSize.x, (int)MapSize.y];
 		SetTiles ();
 		//AddTilesToMap ();
 	}
