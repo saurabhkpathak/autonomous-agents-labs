@@ -11,6 +11,8 @@ public class TilingSystem : MonoBehaviour {
 	public Vector2 MapSize;
 	private TileSprite[,] _map;
 
+	public GameObject selectedUnit;
+
 	public float getTileSize() {
 		return TileSprites[0].tilePrefab.GetComponent<SpriteRenderer> ().sprite.bounds.size.x;
 	}
@@ -46,7 +48,7 @@ public class TilingSystem : MonoBehaviour {
 		_map [1, 2] = new TileSprite (0, Tiles.Mountains);
 		_map [1, 1] = new TileSprite (0, Tiles.Mountains);
 		_map [2, 5] = new TileSprite (0, Tiles.Mountains);
-		_map [2, 3] = new TileSprite (0, Tiles.Mountains);
+		_map [2, 1] = new TileSprite (0, Tiles.Mountains);
 		_map [3, 3] = new TileSprite (0, Tiles.Mountains);
 		_map [3, 5] = new TileSprite (0, Tiles.Mountains);
 		_map [4, 1] = new TileSprite (0, Tiles.Mountains);
@@ -56,6 +58,12 @@ public class TilingSystem : MonoBehaviour {
 	private void PlaceTile(TileSprite tileSprite, int x, int y, Vector3 gridStart) {
 		GameObject newTile = Instantiate (getTile (tileSprite.tileType).tilePrefab);
 		newTile.transform.position = new Vector3 (gridStart.x + (getTileSize() * x), gridStart.y - (getTileSize() * y), 0);
+		if (tileSprite.tileType == Tiles.Plains) {
+			clickHandler ch = newTile.GetComponent<clickHandler> ();
+			ch.tileX = x;
+			ch.tileY = y;
+			ch.map = this;
+		}
 	}
 
 	private void AddTilesToMap() {
@@ -66,6 +74,10 @@ public class TilingSystem : MonoBehaviour {
 				PlaceTile (_map[x, y], x, y, gridStart);
 			}
 		}
+	}
+
+	public void MoveUnitTo(int x, int y) {
+		selectedUnit.transform.position = new Vector2 (x, y);
 	}
 
 	public void Start() {
