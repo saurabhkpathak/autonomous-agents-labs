@@ -11,7 +11,26 @@ public class TilingSystem : MonoBehaviour {
 	public Vector2 MapSize;
 	private TileSprite[,] _map;
 
+	Node[,] graph;
+
 	public GameObject selectedUnit;
+
+	void GeneratePathfindingGraph() {
+		graph = new Node[(int)MapSize.x, (int)MapSize.y];
+
+		for (int i = 0; i < MapSize.x; i++) {
+			for (int j = 0; j < MapSize.y; j++) {
+				if (i > 0)
+					graph [i, j].neighbours.Add (graph [i - 1, j]);
+				if (i < MapSize.x - 1)
+					graph [i, j].neighbours.Add (graph [i + 1, j]);
+				if (j > 0)
+					graph [i, j].neighbours.Add (graph [i, j - 1]);
+				if (j < MapSize.y - 1)
+					graph [i, j].neighbours.Add (graph [i, j + 1]);
+			}
+		}
+	}
 
 	public float getTileSize() {
 		return TileSprites[0].tilePrefab.GetComponent<SpriteRenderer> ().sprite.bounds.size.x;
