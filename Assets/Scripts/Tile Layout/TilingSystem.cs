@@ -79,8 +79,8 @@ public class TilingSystem : MonoBehaviour {
 		newTile.transform.position = new Vector3 (gridStart.x + (getTileSize() * x), gridStart.y - (getTileSize() * y), 0);
 		if (tileSprite.tileType == Tiles.Plains) {
 			clickHandler ch = newTile.GetComponent<clickHandler> ();
-			ch.tileX = x;
-			ch.tileY = y;
+			ch.tileX = (int)(gridStart.x + (getTileSize () * x));
+			ch.tileY = (int)(gridStart.y - (getTileSize () * y));
 			ch.map = this;
 		}
 	}
@@ -96,7 +96,7 @@ public class TilingSystem : MonoBehaviour {
 	}
 
 	public void MoveUnitTo(int x, int y) {
-		selectedUnit.transform.position = new Vector2 (x, y);
+		selectedUnit.transform.position = new Vector3 (x, y, 0);
 	}
 
 	public void Start() {

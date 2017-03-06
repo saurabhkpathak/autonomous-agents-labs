@@ -65,13 +65,12 @@
      <Compile Include="Assets\Scripts\Outlaw States\RobBank.cs" />
      <Compile Include="Assets\Scripts\Outlaw.cs" />
      <Compile Include="Assets\Scripts\Pathfinding\Node.cs" />
+     <Compile Include="Assets\Scripts\Pathfinding\clickHandler.cs" />
      <Compile Include="Assets\Scripts\State.cs" />
      <Compile Include="Assets\Scripts\StateMachine.cs" />
      <Compile Include="Assets\Scripts\Tile Layout\TileSprite.cs" />
      <Compile Include="Assets\Scripts\Tile Layout\Tiles.cs" />
      <Compile Include="Assets\Scripts\Tile Layout\TilingSystem.cs" />
-     <Compile Include="Assets\clickHandler.cs" />
-     <Compile Include="Assets\traverseTile.cs" />
      <None Include="Assets\read me.txt" />
  <Reference Include="UnityEngine.Analytics">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
