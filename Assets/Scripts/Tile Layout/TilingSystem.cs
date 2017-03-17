@@ -14,8 +14,7 @@ public class TilingSystem : MonoBehaviour {
 
 	Node[,] graph;
 
-	public GameObject selectedUnit;
-	List<Node> currentPath = null;
+	public GameObject selectedUnit; 
 
 	void GeneratePathfindingGraph() {
 		graph = new Node[(int)MapSize.x, (int)MapSize.y];
@@ -105,7 +104,12 @@ public class TilingSystem : MonoBehaviour {
 		}
 	}
 
-	public void MoveUnitTo(int x, int y) {
+    public Vector3 TileCoordToWorldCoord(int x, int y)
+    {
+        return new Vector3(x, y, 0);
+    }
+
+    public void MoveUnitTo(int x, int y) {
 		selectedUnit.transform.position = new Vector3 (x, y, 0);
 	}
 
@@ -172,7 +176,10 @@ public class TilingSystem : MonoBehaviour {
 	}
 
 	public void Start() {
-		_map = new TileSprite[(int)MapSize.x, (int)MapSize.y];
+        selectedUnit.GetComponent<Unit>().tileX = (int)selectedUnit.transform.position.x;
+        selectedUnit.GetComponent<Unit>().tileY = (int)selectedUnit.transform.position.y;
+        selectedUnit.GetComponent<Unit>().map = this;
+        _map = new TileSprite[(int)MapSize.x, (int)MapSize.y];
 		DefaultTiles ();
 		SetTiles ();
 		AddTilesToMap ();

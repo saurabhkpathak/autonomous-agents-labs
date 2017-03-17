@@ -8,6 +8,7 @@ public class TileSprite {
 	public int movementCost;
 	public Tiles tileType;
 	public GameObject tilePrefab;
+    public bool isWalkable = true;
 
 	public TileSprite() {
 		this.movementCost = 0;
