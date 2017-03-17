@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 using Lean; //from Unity asset "LeanPool" - freely available in the Asset Store; used here for object pooling
 
@@ -14,9 +15,18 @@ public class TilingSystem : MonoBehaviour {
 	Node[,] graph;
 
 	public GameObject selectedUnit;
+	List<Node> currentPath = null;
 
 	void GeneratePathfindingGraph() {
 		graph = new Node[(int)MapSize.x, (int)MapSize.y];
+
+		for (int i = 0; i < MapSize.x; i++) {
+			for (int j = 0; j < MapSize.y; j++) {
+				graph [i, j] = new Node ();
+				graph [i, j].x = i;
+				graph [i, j].y = j;
+			}
+		}
 
 		for (int i = 0; i < MapSize.x; i++) {
 			for (int j = 0; j < MapSize.y; j++) {
@@ -97,6 +107,68 @@ public class TilingSystem : MonoBehaviour {
 
 	public void MoveUnitTo(int x, int y) {
 		selectedUnit.transform.position = new Vector3 (x, y, 0);
+	}
+
+	public void GeneratePathTo(int x, int y) {
+		selectedUnit.GetComponent<Unit> ().currentPath = null;
+
+		Dictionary<Node, float> dist = new Dictionary<Node, float> ();
+		Dictionary<Node, Node> prev = new Dictionary<Node, Node > ();
+
+		List<Node> unvisited = new List<Node> ();
+
+		Node source = graph [selectedUnit.GetComponent<Unit> ().tileX,
+			              selectedUnit.GetComponent<Unit> ().tileY];
+		Node target = graph [x, y];
+		
+		dist [source] = 0;
+		prev [source] = null;
+
+		foreach (Node v in graph) {
+			if (v != source) {
+				dist [v] = Mathf.Infinity;
+				prev [v] = null;
+
+			}
+			unvisited.Add (v);
+		}
+
+		while (unvisited.Count > 0) {
+			Node u = null;
+
+			foreach (Node possibleU in unvisited) {
+				if (u == null || dist[possibleU] < dist[u]) {
+					u = possibleU;
+				}
+			}
+
+			if (u == target) {
+				break;
+			}
+
+			unvisited.Remove (u);
+
+			foreach (Node v in u.neighbours) {
+				float alt = dist [u] + u.DistanceTo (v);
+				if (alt < dist [v]) {
+					dist [v] = alt;
+					prev [v] = u;
+				}
+			}
+		}
+		if (prev [target] == null) {
+			return;
+		}
+		List<Node> currentPath = new List<Node> ();
+		Node curr = target;
+
+		while (curr != null) {
+			currentPath.Add (curr);
+			curr = prev [curr];
+		}
+
+		currentPath.Reverse ();
+		selectedUnit.GetComponent<Unit> ().currentPath = currentPath;
 	}
 
 	public void Start() {

@@ -10,5 +10,6 @@ public class clickHandler : MonoBehaviour {
 
 	void OnMouseUp () {
 		map.MoveUnitTo (tileX, tileY);
+		//map.GeneratePathTo (tileX, tileY);
 	}
 }

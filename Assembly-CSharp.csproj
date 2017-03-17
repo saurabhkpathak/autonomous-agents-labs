@@ -65,6 +65,7 @@
      <Compile Include="Assets\Scripts\Outlaw States\RobBank.cs" />
      <Compile Include="Assets\Scripts\Outlaw.cs" />
      <Compile Include="Assets\Scripts\Pathfinding\Node.cs" />
+     <Compile Include="Assets\Scripts\Pathfinding\Unit.cs" />
      <Compile Include="Assets\Scripts\Pathfinding\clickHandler.cs" />
      <Compile Include="Assets\Scripts\State.cs" />
      <Compile Include="Assets\Scripts\StateMachine.cs" />
