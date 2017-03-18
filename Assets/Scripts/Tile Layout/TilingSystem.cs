@@ -71,17 +71,17 @@ public class TilingSystem : MonoBehaviour {
 
 	//set the tiles of the map to what is specified in TileSprites
 	private void SetTiles() {
-		//_map [0, 1] = new TileSprite (0, Tiles.Mountains);
-		//_map [0, 4] = new TileSprite (0, Tiles.Mountains);
-		//_map [1, 2] = new TileSprite (0, Tiles.Mountains);
-		//_map [1, 1] = new TileSprite (0, Tiles.Mountains);
-		//_map [2, 5] = new TileSprite (0, Tiles.Mountains);
-		//_map [2, 1] = new TileSprite (0, Tiles.Mountains);
-		//_map [3, 3] = new TileSprite (0, Tiles.Mountains);
-		//_map [3, 5] = new TileSprite (0, Tiles.Mountains);
-		//_map [4, 1] = new TileSprite (0, Tiles.Mountains);
-		//_map [4, 4] = new TileSprite (0, Tiles.Mountains);
-	}
+        _map[0, 1] = new TileSprite(0, Tiles.Mountains);
+        _map[0, 4] = new TileSprite(0, Tiles.Mountains);
+        _map[1, 2] = new TileSprite(0, Tiles.Mountains);
+        _map[1, 1] = new TileSprite(0, Tiles.Mountains);
+        _map[2, 5] = new TileSprite(0, Tiles.Mountains);
+        _map[2, 1] = new TileSprite(0, Tiles.Mountains);
+        _map[3, 3] = new TileSprite(0, Tiles.Mountains);
+        _map[3, 5] = new TileSprite(0, Tiles.Mountains);
+        _map[4, 1] = new TileSprite(0, Tiles.Mountains);
+        _map[4, 4] = new TileSprite(0, Tiles.Mountains);
+    }
 
 	private void PlaceTile(TileSprite tileSprite, int x, int y, Vector3 gridStart) {
 		GameObject newTile = (GameObject)Instantiate (getTile (tileSprite.tileType).tilePrefab);
