@@ -8,13 +8,36 @@ using Lean; //from Unity asset "LeanPool" - freely available in the Asset Store;
 
 public class TilingSystem : MonoBehaviour {
 
+    int[,] tiles;
 	public TileSprite[] TileSprites;
     public int MapSizeX, MapSizeY;
 	private TileSprite[,] _map;
 
 	Node[,] graph;
 
-	public GameObject selectedUnit; 
+	public GameObject selectedUnit;
+
+    void GenerateMapData()
+    {
+        tiles = new int[MapSizeX, MapSizeY];
+        for(int x = 0; x < MapSizeX; x++)
+        {
+            for(int y = 0; y < MapSizeY; y++)
+            {
+                tiles[x, y] = 0;
+            }
+        }
+        tiles[4, 4] = 1;
+        tiles[5, 4] = 1;
+        tiles[6, 4] = 1;
+        tiles[7, 4] = 1;
+        tiles[8, 4] = 1;
+
+        tiles[4, 5] = 1;
+        tiles[4, 4] = 1;
+        tiles[8, 5] = 1;
+        tiles[8, 4] = 1;
+    }
 
 	void GeneratePathfindingGraph() {
 		graph = new Node[MapSizeX, MapSizeY];
@@ -176,15 +199,38 @@ public class TilingSystem : MonoBehaviour {
 		selectedUnit.GetComponent<Unit> ().currentPath = currentPath;
 	}
 
-	public void Start() {
+    void GenerateMapVisual()
+    {
+        for (int x = 0; x < MapSizeX; x++)
+        {
+            for (int y = 0; y < MapSizeY; y++)
+            {
+                TileSprite tt = TileSprites[tiles[x, y]];
+                GameObject go = (GameObject)Instantiate(tt.tilePrefab, new Vector3(x, y, 0), Quaternion.identity);
+
+                if(tt.tileType == Tiles.Plains)
+                {
+                    clickHandler ch = go.GetComponent<clickHandler>();
+                    ch.tileX = x;
+                    ch.tileY = y;
+                    ch.map = this;
+                }
+            }
+        }
+    }
+
+    public void Start() {
         selectedUnit.GetComponent<Unit>().tileX = (int)selectedUnit.transform.position.x;
         selectedUnit.GetComponent<Unit>().tileY = (int)selectedUnit.transform.position.y;
         selectedUnit.GetComponent<Unit>().map = this;
-        _map = new TileSprite[MapSizeX, MapSizeY];
-		DefaultTiles ();
-		SetTiles ();
-		AddTilesToMap ();
+
+        GenerateMapData();
+        //_map = new TileSprite[MapSizeX, MapSizeY];
+		//DefaultTiles ();
+		//SetTiles ();
+		//AddTilesToMap ();
         GeneratePathfindingGraph();
+        GenerateMapVisual();
     }
 
 }

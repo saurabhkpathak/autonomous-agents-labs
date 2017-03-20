@@ -9,7 +9,7 @@ public class Unit : MonoBehaviour {
 
 	public List<Node> currentPath = null;
 
-    void Update()
+    void Update1()
     {
         if (currentPath != null)
         {
