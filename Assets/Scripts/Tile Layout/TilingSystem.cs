@@ -76,13 +76,13 @@ public class TilingSystem : MonoBehaviour {
 //	private List<GameObject> _tiles = new List<GameObject>();
 
 	//create a map of size MapSize of unset tiles
-	private void DefaultTiles() {
-		for (int i = 0; i < MapSizeX; i++) {
-			for (int j = 0; j < MapSizeY; j++) {
-				_map [i,j] = new TileSprite ();
-			}
-		}
-	}
+//	private void DefaultTiles() {
+//		for (int i = 0; i < MapSizeX; i++) {
+//			for (int j = 0; j < MapSizeY; j++) {
+//				_map [i,j] = new TileSprite ();
+//			}
+//		}
+//	}
 
 	private TileSprite getTile(Tiles tile) {
 		foreach(TileSprite tileSprite in TileSprites) {
@@ -111,8 +111,6 @@ public class TilingSystem : MonoBehaviour {
 		newTile.transform.position = new Vector3 (gridStart.x + (getTileSize() * x), gridStart.y - (getTileSize() * y), 0);
 		if (tileSprite.tileType == Tiles.Plains) {
 			clickHandler ch = newTile.GetComponent<clickHandler> ();
-            //ch.tileX = (int)(gridStart.x + (getTileSize () * x));
-            //ch.tileY = (int)(gridStart.y - (getTileSize () * y));
             ch.tileX = x;
             ch.tileY = y;
             ch.map = this;
@@ -196,7 +194,35 @@ public class TilingSystem : MonoBehaviour {
 		}
 
 		currentPath.Reverse ();
+
 		selectedUnit.GetComponent<Unit> ().currentPath = currentPath;
+	}
+
+	public float CostToEnterTile(int sourceX, int sourceY, int targetX, int targetY) {
+
+		TileSprite tt = TileSprites [tiles [targetX, targetY]];
+
+		if(UnitCanEnterTile(targetX, targetY) == false)
+			return Mathf.Infinity;
+
+		float cost = tt.movementCost;
+
+		if( sourceX!=targetX && sourceY!=targetY) {
+			// We are moving diagonally!  Fudge the cost for tie-breaking
+			// Purely a cosmetic thing!
+			cost += 0.001f;
+		}
+
+		return cost;
+
+	}
+
+	public bool UnitCanEnterTile(int x, int y) {
+
+		// We could test the unit's walk/hover/fly type against various
+		// terrain flags here to see if they are allowed to enter the tile.
+
+		return TileSprites [tiles [x, y]].isWalkable;
 	}
 
     void GenerateMapVisual()

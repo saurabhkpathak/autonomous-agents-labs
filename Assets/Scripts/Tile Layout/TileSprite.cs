@@ -11,7 +11,7 @@ public class TileSprite {
     public bool isWalkable = true;
 
 	public TileSprite() {
-		this.movementCost = 0;
+		this.movementCost = 1;
 		this.tileType = Tiles.Plains;
 	}
 
