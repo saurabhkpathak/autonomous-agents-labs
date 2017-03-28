@@ -8,8 +8,8 @@ public class Unit : MonoBehaviour {
     public TilingSystem map;
 
 	public List<Node> currentPath = null;
-	int moveSpeed = 2;
-	float remainingMovement=2;
+	int moveSpeed = 1;
+	float remainingMovement = 2;
 
     void Update()
     {

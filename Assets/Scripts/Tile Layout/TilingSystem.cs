@@ -139,6 +139,11 @@ public class TilingSystem : MonoBehaviour {
 	public void GeneratePathTo(int x, int y) {
 		selectedUnit.GetComponent<Unit> ().currentPath = null;
 
+		if( UnitCanEnterTile(x,y) == false ) {
+			// We probably clicked on a mountain or something, so just quit out.
+			return;
+		}
+
 		Dictionary<Node, float> dist = new Dictionary<Node, float> ();
 		Dictionary<Node, Node> prev = new Dictionary<Node, Node > ();
 
@@ -175,7 +180,8 @@ public class TilingSystem : MonoBehaviour {
 			unvisited.Remove (u);
 
 			foreach (Node v in u.neighbours) {
-				float alt = dist [u] + u.DistanceTo (v);
+				//float alt = dist [u] + u.DistanceTo (v);
+				float alt = dist[u] + CostToEnterTile(u.x, u.y, v.x, v.y);
 				if (alt < dist [v]) {
 					dist [v] = alt;
 					prev [v] = u;
