@@ -7,5 +7,6 @@ public enum Tiles {
 	OutlawCamp,
 	SheriffsOffice,
 	Undertakers,
-	Cemetery
+	Cemetery,
+	Bank
 }

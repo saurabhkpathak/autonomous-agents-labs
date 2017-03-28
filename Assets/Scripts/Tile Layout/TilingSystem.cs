@@ -13,53 +13,31 @@ public class TilingSystem : MonoBehaviour {
     public int MapSizeX, MapSizeY;
 	private TileSprite[,] _map;
 
-	Node[,] graph;
+	Node[,] grid;
 
 	public GameObject selectedUnit;
 
-    void GenerateMapData()
-    {
-        tiles = new int[MapSizeX, MapSizeY];
-        for(int x = 0; x < MapSizeX; x++)
-        {
-            for(int y = 0; y < MapSizeY; y++)
-            {
-                tiles[x, y] = 0;
-            }
-        }
-        tiles[4, 4] = 1;
-        tiles[5, 4] = 1;
-        tiles[6, 4] = 1;
-        tiles[7, 4] = 1;
-        tiles[8, 4] = 1;
-
-        tiles[4, 5] = 1;
-        tiles[4, 4] = 1;
-        tiles[8, 5] = 1;
-        tiles[8, 4] = 1;
-    }
-
 	void GeneratePathfindingGraph() {
-		graph = new Node[MapSizeX, MapSizeY];
+		grid = new Node[MapSizeX, MapSizeY];
 
 		for (int i = 0; i < MapSizeX; i++) {
 			for (int j = 0; j < MapSizeY; j++) {
-				graph [i, j] = new Node ();
-				graph [i, j].x = i;
-				graph [i, j].y = j;
+				grid [i, j] = new Node ();
+				grid [i, j].x = i;
+				grid [i, j].y = j;
 			}
 		}
 
 		for (int i = 0; i < MapSizeX; i++) {
 			for (int j = 0; j < MapSizeY; j++) {
 				if (i > 0)
-					graph [i, j].neighbours.Add (graph [i - 1, j]);
+					grid [i, j].neighbours.Add (grid [i - 1, j]);
 				if (i < MapSizeX - 1)
-					graph [i, j].neighbours.Add (graph [i + 1, j]);
+					grid [i, j].neighbours.Add (grid [i + 1, j]);
 				if (j > 0)
-					graph [i, j].neighbours.Add (graph [i, j - 1]);
+					grid [i, j].neighbours.Add (grid [i, j - 1]);
 				if (j < MapSizeY - 1)
-					graph [i, j].neighbours.Add (graph [i, j + 1]);
+					grid [i, j].neighbours.Add (grid [i, j + 1]);
 			}
 		}
 	}
@@ -67,22 +45,6 @@ public class TilingSystem : MonoBehaviour {
 	public float getTileSize() {
 		return TileSprites[0].tilePrefab.GetComponent<SpriteRenderer> ().sprite.bounds.size.x;
 	}
-
-//	public Sprite DefaultImage;
-//	public GameObject TileContainerPrefab;
-//	public Vector2 CurrentPosition;
-//	public Vector2 ViewPortSize;
-//	private GameObject _tileContainer;
-//	private List<GameObject> _tiles = new List<GameObject>();
-
-	//create a map of size MapSize of unset tiles
-//	private void DefaultTiles() {
-//		for (int i = 0; i < MapSizeX; i++) {
-//			for (int j = 0; j < MapSizeY; j++) {
-//				_map [i,j] = new TileSprite ();
-//			}
-//		}
-//	}
 
 	private TileSprite getTile(Tiles tile) {
 		foreach(TileSprite tileSprite in TileSprites) {
@@ -92,37 +54,67 @@ public class TilingSystem : MonoBehaviour {
 		return TileSprites [0];
 	}
 
+	public Vector3 getTilePositionByType(Tiles tile) {
+		Vector3 coordinates = new Vector3 ();
+
+		for (int i = 0; i < MapSizeX; i++) {
+			for (int j = 0; j < MapSizeY; j++) {
+				if (TileSprites [tiles [i, j]].tileType == tile) {
+					coordinates.x = i;
+					coordinates.y = j;
+					break;
+				}
+			}
+		}
+		return coordinates;
+	}
+
+	private void DefaultTiles() {
+		tiles = new int[MapSizeX, MapSizeY];
+		for(int x = 0; x < MapSizeX; x++)
+		{
+			for(int y = 0; y < MapSizeY; y++)
+			{
+				tiles[x, y] = 0;
+			}
+		}
+	}
+
 	//set the tiles of the map to what is specified in TileSprites
 	private void SetTiles() {
-        _map[0, 1] = new TileSprite(0, Tiles.Mountains);
-        _map[0, 4] = new TileSprite(0, Tiles.Mountains);
-        _map[1, 2] = new TileSprite(0, Tiles.Mountains);
-        _map[1, 1] = new TileSprite(0, Tiles.Mountains);
-        _map[2, 5] = new TileSprite(0, Tiles.Mountains);
-        _map[2, 1] = new TileSprite(0, Tiles.Mountains);
-        _map[3, 3] = new TileSprite(0, Tiles.Mountains);
-        _map[3, 5] = new TileSprite(0, Tiles.Mountains);
-        _map[4, 1] = new TileSprite(0, Tiles.Mountains);
-        _map[4, 4] = new TileSprite(0, Tiles.Mountains);
-    }
+		tiles[4, 4] = 1;
+		tiles[5, 4] = 1;
+		tiles[6, 4] = 1;
+		tiles[7, 4] = 1;
+		tiles[8, 4] = 1;
 
-	private void PlaceTile(TileSprite tileSprite, int x, int y, Vector3 gridStart) {
-		GameObject newTile = (GameObject)Instantiate (getTile (tileSprite.tileType).tilePrefab);
-		newTile.transform.position = new Vector3 (gridStart.x + (getTileSize() * x), gridStart.y - (getTileSize() * y), 0);
-		if (tileSprite.tileType == Tiles.Plains) {
-			clickHandler ch = newTile.GetComponent<clickHandler> ();
-            ch.tileX = x;
-            ch.tileY = y;
-            ch.map = this;
+		tiles[4, 5] = 1;
+		tiles[4, 4] = 1;
+		tiles[8, 5] = 1;
+		tiles[8, 4] = 1;
+
+		tiles [9, 4] = 2;
+	}
+
+	private void PlaceTile(int x, int y) {
+		TileSprite tt = TileSprites[tiles[x, y]];
+		GameObject go = (GameObject)Instantiate(tt.tilePrefab, new Vector3(x, y, 0), Quaternion.identity);
+
+		if(tt.tileType == Tiles.Plains)
+		{
+			clickHandler ch = go.GetComponent<clickHandler>();
+			ch.tileX = x;
+			ch.tileY = y;
+			ch.map = this;
 		}
 	}
 
 	private void AddTilesToMap() {
-		Vector3 gridStart = Camera.main.ScreenToWorldPoint (new Vector3 (0, Screen.height));
-
-		for (int y = 0; y < MapSizeY; y++) {
-			for (int x = 0; x < MapSizeX; x++) {
-				PlaceTile (_map[x, y], x, y, gridStart);
+		for (int x = 0; x < MapSizeX; x++)
+		{
+			for (int y = 0; y < MapSizeY; y++)
+			{
+				PlaceTile (x, y);
 			}
 		}
 	}
@@ -149,13 +141,13 @@ public class TilingSystem : MonoBehaviour {
 
 		List<Node> unvisited = new List<Node> ();
 
-		Node source = graph [selectedUnit.GetComponent<Unit> ().tileX, selectedUnit.GetComponent<Unit> ().tileY];
-		Node target = graph [x, y];
+		Node source = grid [selectedUnit.GetComponent<Unit> ().tileX, selectedUnit.GetComponent<Unit> ().tileY];
+		Node target = grid [x, y];
 		
 		dist [source] = 0;
 		prev [source] = null;
 
-		foreach (Node v in graph) {
+		foreach (Node v in grid) {
 			if (v != source) {
 				dist [v] = Mathf.Infinity;
 				prev [v] = null;
@@ -231,38 +223,15 @@ public class TilingSystem : MonoBehaviour {
 		return TileSprites [tiles [x, y]].isWalkable;
 	}
 
-    void GenerateMapVisual()
-    {
-        for (int x = 0; x < MapSizeX; x++)
-        {
-            for (int y = 0; y < MapSizeY; y++)
-            {
-                TileSprite tt = TileSprites[tiles[x, y]];
-                GameObject go = (GameObject)Instantiate(tt.tilePrefab, new Vector3(x, y, 0), Quaternion.identity);
-
-                if(tt.tileType == Tiles.Plains)
-                {
-                    clickHandler ch = go.GetComponent<clickHandler>();
-                    ch.tileX = x;
-                    ch.tileY = y;
-                    ch.map = this;
-                }
-            }
-        }
-    }
-
     public void Start() {
         selectedUnit.GetComponent<Unit>().tileX = (int)selectedUnit.transform.position.x;
         selectedUnit.GetComponent<Unit>().tileY = (int)selectedUnit.transform.position.y;
         selectedUnit.GetComponent<Unit>().map = this;
-
-        GenerateMapData();
         //_map = new TileSprite[MapSizeX, MapSizeY];
-		//DefaultTiles ();
-		//SetTiles ();
-		//AddTilesToMap ();
+		DefaultTiles ();
+		SetTiles ();
         GeneratePathfindingGraph();
-        GenerateMapVisual();
+		AddTilesToMap ();
     }
 
 }

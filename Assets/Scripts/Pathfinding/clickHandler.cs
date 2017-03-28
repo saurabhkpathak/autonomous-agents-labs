@@ -11,8 +11,6 @@ public class clickHandler : MonoBehaviour {
 	void OnMouseUp () {
         //map.MoveUnitTo (tileX, tileY);
         Debug.Log("click");
-        //Debug.Log("x is: " + this.GetComponent<Transform>().position.x +
-            //" & y is: " + this.GetComponent<Transform>().position.y);
 		map.GeneratePathTo ((int)this.GetComponent<Transform>().position.x, (int)this.GetComponent<Transform>().position.y);
 	}
 }
