@@ -46,8 +46,8 @@ public class Miner : Agent
         public Miner()
         {
             stateMachine = new StateMachine<Miner>(this);
-            //stateMachine.CurrentState = new GoHomeAndSleepTillRested();
-            //stateMachine.GlobalState = new MinerGlobalState();
+			stateMachine.CurrentState = GoHomeAndSleepTillRested.Instance;
+			stateMachine.GlobalState = MinerGlobalState.Instance;
             wifeId = this.Id + 1;  // hack hack
 
             //Location = Location.shack;
