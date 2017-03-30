@@ -1,4 +1,6 @@
-﻿abstract public class State <T> {
+﻿using System.Collections.Generic;
+using UnityEngine;
+abstract public class State <T> {
 
 	abstract public void Enter (T agent);
 	abstract public void Execute (T agent);
@@ -9,9 +11,9 @@
     abstract public class TravelToTarget<T> : State<T>
     {
         protected static AStar pathFinder = new AStar();
-        //protected List<Tile> path;
+        protected List<Node> path;
 
-        //protected Vector2 targetPosition;
+        protected Vector2 targetPosition;
         protected State<T> targetState;
     }
 }

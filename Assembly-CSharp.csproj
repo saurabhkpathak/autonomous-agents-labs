@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\Miner States\EnterMineAndDigForNugget.cs" />
     <Compile Include="Assets\Scripts\Miner States\GoHomeAndSleepTillRested.cs" />
     <Compile Include="Assets\Scripts\Miner States\MinerGlobalState.cs" />
+    <Compile Include="Assets\Scripts\Miner States\MinerTravelToTarget.cs" />
     <Compile Include="Assets\Scripts\Miner States\QuenchThirst.cs" />
     <Compile Include="Assets\Scripts\Miner States\VisitBankAndDepositGold.cs" />
     <Compile Include="Assets\Scripts\Miner.cs" />
