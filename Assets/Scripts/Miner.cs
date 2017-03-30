@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class Miner : Agent
+﻿public class Miner : Agent
 {
         public int MaxNuggets = 3;
         public int ThirstLevel = 5;

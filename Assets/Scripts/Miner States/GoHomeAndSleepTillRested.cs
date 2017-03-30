@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-
+﻿using UnityEngine;
 public sealed class GoHomeAndSleepTillRested : State<Miner>
 {
 
@@ -17,28 +15,49 @@ public sealed class GoHomeAndSleepTillRested : State<Miner>
     static GoHomeAndSleepTillRested() { }
     private GoHomeAndSleepTillRested() { }
 
-	public override void Enter(Miner agent)
+    public override void Enter(Miner miner)
     {
-        Debug.Log("Gathering creative energies...");
+        Debug.Log("Arrived Home");
+        Message.DispatchMessage(0, miner.Id, miner.WifeId, MessageType.HiHoneyImHome);
     }
 
-	public override void Execute(Miner agent)
+    public override void Execute(Miner miner)
     {
-		agent.StateMachine.ChangeState(GoHomeAndSleepTillRested.Instance);
+        if (miner.HowFatigued < miner.TirednessThreshold)
+        {
+            Debug.Log("All mah fatigue has drained away. Time to find more gold!");
+            //miner.StateMachine.ChangeState(new MinerTravelToTarget(Location.goldMine, new EnterMineAndDigForNugget()));
+        }
+        else
+        {
+            miner.HowFatigued--;
+            Debug.Log("ZZZZZ....");
+        }
     }
 
-	public override void Exit(Miner agent)
+    public override void Exit(Miner miner)
     {
-        Debug.Log("...creativity spent!");
+
     }
 
-	public override bool OnMesssage(Miner agent, Telegram telegram)
+    public override bool OnMesssage(Miner miner, Telegram telegram)
     {
-        throw new NotImplementedException();
+        switch (telegram.messageType)
+        {
+            case MessageType.HiHoneyImHome:
+                return false;
+            case MessageType.StewsReady:
+                Debug.Log("Message handled by " + miner.Id + " at time ");
+                Debug.Log("Okay Hun, ahm a comin'!");
+                //miner.StateMachine.ChangeState(new EatStew());
+                return true;
+            default:
+                return false;
+        }
     }
 
-	public override bool OnSenseEvent(Miner agent, Sense sense)
+    public override bool OnSenseEvent(Miner agent, Sense sense)
     {
-        throw new NotImplementedException();
+        return false;
     }
 }

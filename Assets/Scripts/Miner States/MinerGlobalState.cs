@@ -34,11 +34,19 @@ public sealed class MinerGlobalState : State<Miner>
 
 	public override bool OnMesssage(Miner agent, Telegram telegram)
 	{
-		throw new NotImplementedException();
-	}
+        switch (telegram.messageType)
+        {
+            case MessageType.SheriffEncountered:
+                //Printer.PrintMessageData("Message handled by " + agent.Id + " at time ");
+                Debug.Log("Good day to you too, sheriff!");
+                return true;
+            default:
+                return false;
+        }
+    }
 
 	public override bool OnSenseEvent(Miner agent, Sense sense)
 	{
-		throw new NotImplementedException();
+        return false;
 	}
 }
