@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public sealed class ElsaCreateState : State<Elsa> {
 
@@ -26,4 +27,14 @@ public sealed class ElsaCreateState : State<Elsa> {
 	public override void Exit (Elsa agent) {
 		Debug.Log("...Elsa creativity spent!");
 	}
+
+    public override bool OnMesssage(Elsa agent, Telegram telegram)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override bool OnSenseEvent(Elsa agent, Sense sense)
+    {
+        throw new NotImplementedException();
+    }
 }

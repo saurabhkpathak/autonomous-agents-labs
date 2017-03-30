@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.5.1f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -89,13 +91,19 @@
     <Compile Include="Assets\Scripts\LeanPool\Scripts\LeanPool.cs" />
     <Compile Include="Assets\Scripts\LeanPool\Scripts\LeanPooledRigidbody.cs" />
     <Compile Include="Assets\Scripts\LeanPool\Scripts\LeanPooledRigidbody2D.cs" />
+    <Compile Include="Assets\Scripts\Messaging\Messages.cs" />
+    <Compile Include="Assets\Scripts\Miner States\MinerStates.cs" />
+    <Compile Include="Assets\Scripts\Miner.cs" />
     <Compile Include="Assets\Scripts\Outlaw States\LurkInCamp.cs" />
     <Compile Include="Assets\Scripts\Outlaw States\LurkInCemetery.cs" />
     <Compile Include="Assets\Scripts\Outlaw States\RobBank.cs" />
     <Compile Include="Assets\Scripts\Outlaw.cs" />
+    <Compile Include="Assets\Scripts\Pathfinding\AStar.cs" />
+    <Compile Include="Assets\Scripts\Pathfinding\MovingUnit.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\Node.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\Unit.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\clickHandler.cs" />
+    <Compile Include="Assets\Scripts\Sensing\SenseEvent.cs" />
     <Compile Include="Assets\Scripts\State.cs" />
     <Compile Include="Assets\Scripts\StateMachine.cs" />
     <Compile Include="Assets\Scripts\Tile Layout\TileSprite.cs" />

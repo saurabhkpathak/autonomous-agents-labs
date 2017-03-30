@@ -8,7 +8,7 @@ public class Outlaw : MonoBehaviour {
 	private int goldCarried = 0;
 
 	public void Awake () {
-		this.stateMachine = new StateMachine<Outlaw>();
+		this.stateMachine = new StateMachine<Outlaw>(this);
 		this.stateMachine.Init(this, LurkInCamp.Instance);
 	}
 

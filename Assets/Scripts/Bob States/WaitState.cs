@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public sealed class WaitState : State<Bob> {
@@ -26,4 +27,14 @@ public sealed class WaitState : State<Bob> {
 	public override void Exit (Bob agent) {
 		Debug.Log("...waited long enough!");
 	}
+
+    public override bool OnMesssage(Bob agent, Telegram telegram)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override bool OnSenseEvent(Bob agent, Sense sense)
+    {
+        throw new NotImplementedException();
+    }
 }

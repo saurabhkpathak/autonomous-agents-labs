@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public sealed class ElsaWaitState : State<Elsa> {
 
@@ -26,4 +27,14 @@ public sealed class ElsaWaitState : State<Elsa> {
 	public override void Exit (Elsa agent) {
 		Debug.Log("...Elsa waited long enough!");
 	}
+
+    public override bool OnMesssage(Elsa agent, Telegram telegram)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override bool OnSenseEvent(Elsa agent, Sense sense)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using System.Collections;
+﻿using UnityEngine;
 
 [System.Serializable]
 public class TileSprite {
@@ -11,12 +9,12 @@ public class TileSprite {
     public bool isWalkable = true;
 
 	public TileSprite() {
-		this.movementCost = 1;
-		this.tileType = Tiles.Plains;
+        movementCost = 1;
+        tileType = Tiles.Plains;
 	}
 
 	public TileSprite(int cost, Tiles type) {
-		this.movementCost = cost;
-		this.tileType = type;
+        movementCost = cost;
+        tileType = type;
 	}
 }

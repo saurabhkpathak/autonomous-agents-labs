@@ -1,10 +1,5 @@
 using UnityEngine;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-
-using Lean; //from Unity asset "LeanPool" - freely available in the Asset Store; used here for object pooling
 
 public class TilingSystem : MonoBehaviour {
 
@@ -98,7 +93,7 @@ public class TilingSystem : MonoBehaviour {
 
 	private void PlaceTile(int x, int y) {
 		TileSprite tt = TileSprites[tiles[x, y]];
-		GameObject go = (GameObject)Instantiate(tt.tilePrefab, new Vector3(x, y, 0), Quaternion.identity);
+		GameObject go = Instantiate(tt.tilePrefab, new Vector3(x, y, 0), Quaternion.identity);
 
 		if(tt.tileType == Tiles.Plains)
 		{
