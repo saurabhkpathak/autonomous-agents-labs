@@ -7,8 +7,7 @@ public class clickHandler : MonoBehaviour {
 	public TilingSystem map;
 
 	void OnMouseUp () {
-        //map.MoveUnitTo (tileX, tileY);
         Debug.Log("click");
-		map.GeneratePathTo ((int)GetComponent<Transform>().position.x, (int)GetComponent<Transform>().position.y);
-	}
+        map.MoveUnitTo((int)GetComponent<Transform>().position.x, (int)GetComponent<Transform>().position.y);
+    }
 }

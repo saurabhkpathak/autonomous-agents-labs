@@ -26,7 +26,7 @@ public sealed class GoHomeAndSleepTillRested : State<Miner>
         if (miner.HowFatigued < miner.TirednessThreshold)
         {
             Debug.Log("All mah fatigue has drained away. Time to find more gold!");
-            //miner.StateMachine.ChangeState(new MinerTravelToTarget(Location.goldMine, new EnterMineAndDigForNugget()));
+            miner.StateMachine.ChangeState(new MinerTravelToTarget(Tiles.GoldMine, new EnterMineAndDigForNugget(), miner));
         }
         else
         {
@@ -49,7 +49,7 @@ public sealed class GoHomeAndSleepTillRested : State<Miner>
             case MessageType.StewsReady:
                 Debug.Log("Message handled by " + miner.Id + " at time ");
                 Debug.Log("Okay Hun, ahm a comin'!");
-                //miner.StateMachine.ChangeState(new EatStew());
+                miner.StateMachine.ChangeState(new EatStew());
                 return true;
             default:
                 return false;

@@ -6,45 +6,45 @@ using UnityEngine;
 
 public class MinerTravelToTarget : TravelToTarget<Miner>
 {
-	public MinerTravelToTarget(Tiles target, State<Miner> state)
+	public MinerTravelToTarget(Tiles target, State<Miner> state, Miner miner)
     {
-		//targetPosition = target;
+        targetPosition = miner.tileMap.GetComponent<TilingSystem>().getTilePositionByType(target);
         targetState = state;
     }
 
     public override void Enter(Miner miner)
     {
-        //path = pathFinder.FindPath(miner.CurrentPosition, targetPosition);
+        path = miner.tileMap.GetComponent<TilingSystem>().GeneratePathTo((int)targetPosition.x, (int)targetPosition.y);
 
         //Debug.Log("Walkin' to " + LocationProperties.ToString(LocationProperties.GetLocation(targetPosition)) + ".");
     }
 
     public override void Execute(Miner miner)
     {
-        //if (path.Count > 0)
-        //{
-        //    for (int i = 0; i < path.Count; ++i)
-        //    {
-        //        path[i].TintColor = Color.Blue;
-        //        path[i].TintAlpha = 0.5f;
-        //    }
+        if (path.Count > 0)
+        {
+            //for (int i = 0; i < path.Count; ++i)
+            //{
+            //    path[i].TintColor = Color.Blue;
+            //    path[i].TintAlpha = 0.5f;
+            //}
 
-        //    miner.CurrentPosition = path[0].Position;
-        //    path.RemoveAt(0);
-        //}
-        //else
-        //{
-        //    miner.CurrentPosition = targetPosition;
+            miner.CurrentPosition = new Vector2(path[0].x, path[0].y);
+            path.RemoveAt(0);
+        }
+        else
+        {
+            miner.CurrentPosition = targetPosition;
 
-        //    State<Miner> previousState = miner.StateMachine.PreviousState;
-        //    miner.StateMachine.ChangeState(targetState);
-        //    miner.StateMachine.PreviousState = previousState;
-        //}
+            State<Miner> previousState = miner.StateMachine.PreviousState;
+            miner.StateMachine.ChangeState(targetState);
+            miner.StateMachine.PreviousState = previousState;
+        }
     }
 
     public override void Exit(Miner miner)
     {
-        //path.Clear();
+        path.Clear();
     }
 
     public override bool OnMesssage(Miner agent, Telegram telegram)

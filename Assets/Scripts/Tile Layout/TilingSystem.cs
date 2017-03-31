@@ -120,16 +120,16 @@ public class TilingSystem : MonoBehaviour {
     }
 
     public void MoveUnitTo(int x, int y) {
-		selectedUnit.transform.position = new Vector3 (x, y, 0);
-	}
+		//selectedUnit.transform.position = new Vector3 (x, y, 0);
+        selectedUnit.GetComponent<Unit>().currentPath = GeneratePathTo(x, y);
+    }
 
-	public void GeneratePathTo(int x, int y) {
+	public List<Node> GeneratePathTo(int x, int y) {
 		selectedUnit.GetComponent<Unit> ().currentPath = null;
 
-		if( UnitCanEnterTile(x,y) == false ) {
-			// We probably clicked on a mountain or something, so just quit out.
-			return;
-		}
+		//if( UnitCanEnterTile(x,y) == false ) {
+		//	return;
+		//}
 
 		Dictionary<Node, float> dist = new Dictionary<Node, float> ();
 		Dictionary<Node, Node> prev = new Dictionary<Node, Node > ();
@@ -175,9 +175,9 @@ public class TilingSystem : MonoBehaviour {
 				}
 			}
 		}
-		if (prev [target] == null) {
-			return;
-		}
+		//if (prev [target] == null) {
+		//	return;
+		//}
 		List<Node> currentPath = new List<Node> ();
 		Node curr = target;
 
@@ -188,7 +188,7 @@ public class TilingSystem : MonoBehaviour {
 
 		currentPath.Reverse ();
 
-		selectedUnit.GetComponent<Unit> ().currentPath = currentPath;
+        return currentPath;
 	}
 
 	public float CostToEnterTile(int sourceX, int sourceY, int targetX, int targetY) {

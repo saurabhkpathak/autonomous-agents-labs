@@ -19,11 +19,11 @@ public class VisitBankAndDepositGold : State<Miner>
         if (miner.Rich())
         {
             Debug.Log("WooHoo! Rich enough for now. Back home to mah li'lle lady");
-            //miner.StateMachine.ChangeState(new MinerTravelToTarget(Location.shack, new GoHomeAndSleepTillRested()));
+            miner.StateMachine.ChangeState(new MinerTravelToTarget(Tiles.Shack, GoHomeAndSleepTillRested.Instance, miner));
         }
         else
         {
-            //miner.StateMachine.ChangeState(new MinerTravelToTarget(Location.goldMine, new EnterMineAndDigForNugget()));
+            miner.StateMachine.ChangeState(new MinerTravelToTarget(Tiles.GoldMine, new EnterMineAndDigForNugget(), miner));
         }
     }
 
