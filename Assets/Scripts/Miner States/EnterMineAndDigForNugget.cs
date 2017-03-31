@@ -18,11 +18,11 @@ public class EnterMineAndDigForNugget : State<Miner>
         Debug.Log("Pickin' up a nugget");
         if (miner.PocketsFull())
         {
-            //miner.StateMachine.ChangeState(new MinerTravelToTarget(Location.bank, new VisitBankAndDepositGold()));
+			miner.StateMachine.ChangeState(new MinerTravelToTarget(Tiles.Bank, new VisitBankAndDepositGold()));
         }
         if (miner.Thirsty())
         {
-            //miner.StateMachine.ChangeState(new MinerTravelToTarget(Location.saloon, new QuenchThirst()));
+			miner.StateMachine.ChangeState(new MinerTravelToTarget(Tiles.Saloon, new QuenchThirst()));
         }
     }
 

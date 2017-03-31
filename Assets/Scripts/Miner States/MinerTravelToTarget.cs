@@ -2,18 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 public class MinerTravelToTarget : TravelToTarget<Miner>
 {
-    //public MinerTravelToTarget(Location target, State<Miner> state)
-    //{
-    //    targetPosition = LocationProperties.LocationCoords[(int)target];
-    //    targetState = state;
-    //}
-
-    public MinerTravelToTarget(State<Miner> state)
+	public MinerTravelToTarget(Tiles target, State<Miner> state)
     {
-        targetPosition = LocationProperties.LocationCoords[(int)target];
+		//targetPosition = target;
         targetState = state;
     }
 
@@ -21,7 +16,7 @@ public class MinerTravelToTarget : TravelToTarget<Miner>
     {
         //path = pathFinder.FindPath(miner.CurrentPosition, targetPosition);
 
-        Debug.Log("Walkin' to " + LocationProperties.ToString(LocationProperties.GetLocation(targetPosition)) + ".");
+        //Debug.Log("Walkin' to " + LocationProperties.ToString(LocationProperties.GetLocation(targetPosition)) + ".");
     }
 
     public override void Execute(Miner miner)

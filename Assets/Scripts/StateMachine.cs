@@ -1,4 +1,6 @@
-﻿public class StateMachine<T>
+﻿using UnityEngine;
+
+public class StateMachine<T>
 {
     private T owner;
 

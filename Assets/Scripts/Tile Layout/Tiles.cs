@@ -5,5 +5,6 @@
 	SheriffsOffice,
 	Undertakers,
 	Cemetery,
-	Bank
+	Bank,
+	Saloon
 }

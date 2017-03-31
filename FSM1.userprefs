@@ -1,6 +1,12 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Miner.cs">
+    <Files>
+      <File FileName="Assets/Scripts/Miner.cs" Line="52" Column="3" />
+      <File FileName="Assets/Scripts/StateMachine.cs" Line="14" Column="31" />
+      <File FileName="Assets/Scripts/Miner States/MinerGlobalState.cs" Line="32" Column="37" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
