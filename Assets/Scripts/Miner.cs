@@ -48,8 +48,9 @@ public class Miner : Agent
     {
         stateMachine = new StateMachine<Miner>(this);
         stateMachine.CurrentState = GoHomeAndSleepTillRested.Instance;
-        stateMachine.GlobalState = MinerGlobalState.Instance;
+        //stateMachine.GlobalState = MinerGlobalState.Instance;
         wifeId = this.Id + 1;  // hack hack
+        this.CurrentPosition = new Vector2(0, 0);
 
 		//Location = Tiles.Shack;
     }
@@ -57,10 +58,11 @@ public class Miner : Agent
     // This method is invoked by the Game object as a result of XNA updates 
     public override void Update()
     {
-        //if (Location >= 0)
-        //{
-        //    howThirsty += 1;
-        //}
+        Vector2 shackPosition = tileMap.GetComponent<TilingSystem>().getTilePositionByType(Tiles.Shack);
+        if (this.CurrentPosition != shackPosition)
+        {
+            howThirsty += 1;
+        }
         StateMachine.Update();
     }
 

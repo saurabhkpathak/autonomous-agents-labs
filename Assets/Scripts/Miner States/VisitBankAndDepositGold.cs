@@ -23,7 +23,7 @@ public class VisitBankAndDepositGold : State<Miner>
         }
         else
         {
-            miner.StateMachine.ChangeState(new MinerTravelToTarget(Tiles.GoldMine, new EnterMineAndDigForNugget(), miner));
+            miner.StateMachine.ChangeState(new MinerTravelToTarget(Tiles.GoldMine, EnterMineAndDigForNugget.Instance, miner));
         }
     }
 

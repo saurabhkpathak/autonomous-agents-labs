@@ -26,7 +26,7 @@ public sealed class GoHomeAndSleepTillRested : State<Miner>
         if (miner.HowFatigued < miner.TirednessThreshold)
         {
             Debug.Log("All mah fatigue has drained away. Time to find more gold!");
-            miner.StateMachine.ChangeState(new MinerTravelToTarget(Tiles.GoldMine, new EnterMineAndDigForNugget(), miner));
+            miner.StateMachine.ChangeState(new MinerTravelToTarget(Tiles.GoldMine, EnterMineAndDigForNugget.Instance, miner));
         }
         else
         {

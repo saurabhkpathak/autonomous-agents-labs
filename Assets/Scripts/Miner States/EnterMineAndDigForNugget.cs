@@ -4,8 +4,21 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class EnterMineAndDigForNugget : State<Miner>
+public sealed class EnterMineAndDigForNugget : State<Miner>
 {
+    static readonly EnterMineAndDigForNugget instance = new EnterMineAndDigForNugget();
+
+    public static EnterMineAndDigForNugget Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
+
+    static EnterMineAndDigForNugget() { }
+    private EnterMineAndDigForNugget() { }
+
     public override void Enter(Miner miner)
     {
         Debug.Log("Arrived in the goldmine");

@@ -8,7 +8,7 @@ public class TilingSystem : MonoBehaviour {
     public int MapSizeX, MapSizeY;
 	private TileSprite[,] _map;
 
-	Node[,] grid;
+	public Node[,] grid;
 
 	public GameObject selectedUnit;
 

@@ -17,7 +17,7 @@ public class QuenchThirst : State<Miner>
         miner.HowThirsty = 0;
         miner.MoneyInBank -= 2;
         Debug.Log("That's mighty fine sippin' liquer");
-        miner.StateMachine.ChangeState(new MinerTravelToTarget(Tiles.GoldMine, new EnterMineAndDigForNugget(), miner));
+        miner.StateMachine.ChangeState(new MinerTravelToTarget(Tiles.GoldMine, EnterMineAndDigForNugget.Instance, miner));
     }
 
     public override void Exit(Miner miner)
