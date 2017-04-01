@@ -9,28 +9,28 @@ public class Bob : MonoBehaviour {
 	public int createdTime = 0;
 
 	public void Awake () {
-		this.stateMachine = new StateMachine<Bob>();
-		this.stateMachine.Init(this, WaitState.Instance);
+        stateMachine = new StateMachine<Bob>(this);
+        stateMachine.Init(this, WaitState.Instance);
 	}
 
 	public void IncreaseWaitedTime (int amount) {
-		this.waitedTime += amount;
+        waitedTime += amount;
 	}
 
 	public bool WaitedLongEnough () {
-		return this.waitedTime >= WAIT_TIME;
+		return waitedTime >= WAIT_TIME;
 	}
 
 	public void CreateTime () {
-		this.createdTime++;
-		this.waitedTime = 0;
+        createdTime++;
+        waitedTime = 0;
 	}
 
 	public void ChangeState (State<Bob> state) {
-		this.stateMachine.ChangeState(state);
+        stateMachine.ChangeState(state);
 	}
 
 	public void Update () {
-		this.stateMachine.Update();
+        stateMachine.Update();
 	}
 }

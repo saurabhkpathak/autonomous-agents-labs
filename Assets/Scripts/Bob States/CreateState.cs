@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public sealed class CreateState : State<Bob> {
 	
@@ -26,4 +27,14 @@ public sealed class CreateState : State<Bob> {
 	public override void Exit (Bob agent) {
 		Debug.Log("...creativity spent!");
 	}
+
+    public override bool OnMesssage(Bob agent, Telegram telegram)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override bool OnSenseEvent(Bob agent, Sense sense)
+    {
+        throw new NotImplementedException();
+    }
 }

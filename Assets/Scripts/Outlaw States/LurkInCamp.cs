@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public sealed class LurkInCamp : State<Outlaw> {
 
@@ -26,4 +27,14 @@ public sealed class LurkInCamp : State<Outlaw> {
 	public override void Exit (Outlaw agent) {
 		Debug.Log("Outlaw stopped lurking in camp");
 	}
+
+    public override bool OnMesssage(Outlaw agent, Telegram telegram)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override bool OnSenseEvent(Outlaw agent, Sense sense)
+    {
+        throw new NotImplementedException();
+    }
 }

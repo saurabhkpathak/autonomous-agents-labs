@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public sealed class RobBank : State<Outlaw> {
 
@@ -27,4 +28,14 @@ public sealed class RobBank : State<Outlaw> {
 	public override void Exit (Outlaw agent) {
 		Debug.Log("Outlaw is leaving bank after robbing it");
 	}
+
+    public override bool OnMesssage(Outlaw agent, Telegram telegram)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override bool OnSenseEvent(Outlaw agent, Sense sense)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -9,7 +9,7 @@ public class Elsa : MonoBehaviour {
 	public int createdTime = 0;
 
 	public void Awake () {
-		this.stateMachine = new StateMachine<Elsa>();
+		this.stateMachine = new StateMachine<Elsa>(this);
 		this.stateMachine.Init(this, ElsaCreateState.Instance);
 	}
 

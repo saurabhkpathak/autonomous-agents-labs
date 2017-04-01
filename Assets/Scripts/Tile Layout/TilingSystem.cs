@@ -1,10 +1,5 @@
 using UnityEngine;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-
-using Lean; //from Unity asset "LeanPool" - freely available in the Asset Store; used here for object pooling
 
 public class TilingSystem : MonoBehaviour {
 
@@ -13,7 +8,7 @@ public class TilingSystem : MonoBehaviour {
     public int MapSizeX, MapSizeY;
 	private TileSprite[,] _map;
 
-	Node[,] grid;
+	public Node[,] grid;
 
 	public GameObject selectedUnit;
 
@@ -93,12 +88,19 @@ public class TilingSystem : MonoBehaviour {
 		tiles[8, 5] = 1;
 		tiles[8, 4] = 1;
 
+		// bank
 		tiles [9, 4] = 2;
+		//shack
+		tiles[8,6] = 5;
+		//gold mine
+		tiles[5,6] = 4;
+		//saloon
+		tiles[3,1] = 3;
 	}
 
 	private void PlaceTile(int x, int y) {
 		TileSprite tt = TileSprites[tiles[x, y]];
-		GameObject go = (GameObject)Instantiate(tt.tilePrefab, new Vector3(x, y, 0), Quaternion.identity);
+		GameObject go = Instantiate(tt.tilePrefab, new Vector3(x, y, 0), Quaternion.identity);
 
 		if(tt.tileType == Tiles.Plains)
 		{
@@ -125,15 +127,15 @@ public class TilingSystem : MonoBehaviour {
     }
 
     public void MoveUnitTo(int x, int y) {
-		selectedUnit.transform.position = new Vector3 (x, y, 0);
-	}
+		//selectedUnit.transform.position = new Vector3 (x, y, 0);
+        selectedUnit.GetComponent<Unit>().currentPath = GeneratePathTo(x, y);
+    }
 
-	public void GeneratePathTo(int x, int y) {
+	public List<Node> GeneratePathTo(int x, int y) {
 		selectedUnit.GetComponent<Unit> ().currentPath = null;
 
 		if( UnitCanEnterTile(x,y) == false ) {
-			// We probably clicked on a mountain or something, so just quit out.
-			return;
+			return null;
 		}
 
 		Dictionary<Node, float> dist = new Dictionary<Node, float> ();
@@ -181,7 +183,7 @@ public class TilingSystem : MonoBehaviour {
 			}
 		}
 		if (prev [target] == null) {
-			return;
+			return null;
 		}
 		List<Node> currentPath = new List<Node> ();
 		Node curr = target;
@@ -193,7 +195,7 @@ public class TilingSystem : MonoBehaviour {
 
 		currentPath.Reverse ();
 
-		selectedUnit.GetComponent<Unit> ().currentPath = currentPath;
+        return currentPath;
 	}
 
 	public float CostToEnterTile(int sourceX, int sourceY, int targetX, int targetY) {

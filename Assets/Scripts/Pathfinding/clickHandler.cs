@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class clickHandler : MonoBehaviour {
 
@@ -9,8 +7,7 @@ public class clickHandler : MonoBehaviour {
 	public TilingSystem map;
 
 	void OnMouseUp () {
-        //map.MoveUnitTo (tileX, tileY);
         Debug.Log("click");
-		map.GeneratePathTo ((int)this.GetComponent<Transform>().position.x, (int)this.GetComponent<Transform>().position.y);
-	}
+        map.MoveUnitTo((int)GetComponent<Transform>().position.x, (int)GetComponent<Transform>().position.y);
+    }
 }
