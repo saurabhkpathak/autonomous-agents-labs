@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class MinerTravelToTarget : TravelToTarget<Miner>
@@ -100,12 +97,6 @@ public class MinerTravelToTarget : TravelToTarget<Miner>
     {
         if (path.Count > 0)
         {
-            //for (int i = 0; i < path.Count; ++i)
-            //{
-            //    path[i].TintColor = Color.Blue;
-            //    path[i].TintAlpha = 0.5f;
-            //}
-
             miner.CurrentPosition = new Vector2(path[0].x, path[0].y);
             miner.GetComponent<Transform>().position = miner.CurrentPosition;
             path.RemoveAt(0);

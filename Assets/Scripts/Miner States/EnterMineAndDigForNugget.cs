@@ -27,13 +27,13 @@ public sealed class EnterMineAndDigForNugget : State<Miner>
     public override void Execute(Miner miner)
     {
         miner.GoldCarrying += 1;
+        Debug.Log("miner has gold:" + miner.GoldCarrying);
         miner.HowFatigued += 1;
         Debug.Log("Pickin' up a nugget");
         if (miner.PocketsFull())
         {
 			miner.StateMachine.ChangeState(new MinerTravelToTarget(Tiles.Bank, new VisitBankAndDepositGold(), miner));
-        }
-        if (miner.Thirsty())
+        } else if (miner.Thirsty())
         {
 			miner.StateMachine.ChangeState(new MinerTravelToTarget(Tiles.Saloon, new QuenchThirst(), miner));
         }
