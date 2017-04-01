@@ -2,9 +2,11 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Miner.cs">
     <Files>
-      <File FileName="Assets/Scripts/Miner.cs" Line="52" Column="3" />
-      <File FileName="Assets/Scripts/StateMachine.cs" Line="14" Column="31" />
-      <File FileName="Assets/Scripts/Miner States/MinerGlobalState.cs" Line="32" Column="37" />
+      <File FileName="Assets/Scripts/Tile Layout/TilingSystem.cs" Line="106" Column="1" />
+      <File FileName="Assets/Scripts/Pathfinding/clickHandler.cs" Line="10" Column="1" />
+      <File FileName="Assets/Scripts/Miner States/MinerTravelToTarget.cs" Line="47" Column="1" />
+      <File FileName="Assets/Scripts/Miner.cs" Line="62" Column="20" />
+      <File FileName="Assets/Scripts/Agent.cs" Line="21" Column="17" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

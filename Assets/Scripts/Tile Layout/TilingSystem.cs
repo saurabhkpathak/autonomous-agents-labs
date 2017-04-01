@@ -88,7 +88,14 @@ public class TilingSystem : MonoBehaviour {
 		tiles[8, 5] = 1;
 		tiles[8, 4] = 1;
 
+		// bank
 		tiles [9, 4] = 2;
+		//shack
+		tiles[8,6] = 5;
+		//gold mine
+		tiles[5,6] = 4;
+		//saloon
+		tiles[3,1] = 3;
 	}
 
 	private void PlaceTile(int x, int y) {
@@ -127,9 +134,9 @@ public class TilingSystem : MonoBehaviour {
 	public List<Node> GeneratePathTo(int x, int y) {
 		selectedUnit.GetComponent<Unit> ().currentPath = null;
 
-		//if( UnitCanEnterTile(x,y) == false ) {
-		//	return;
-		//}
+		if( UnitCanEnterTile(x,y) == false ) {
+			return null;
+		}
 
 		Dictionary<Node, float> dist = new Dictionary<Node, float> ();
 		Dictionary<Node, Node> prev = new Dictionary<Node, Node > ();
@@ -175,9 +182,9 @@ public class TilingSystem : MonoBehaviour {
 				}
 			}
 		}
-		//if (prev [target] == null) {
-		//	return;
-		//}
+		if (prev [target] == null) {
+			return null;
+		}
 		List<Node> currentPath = new List<Node> ();
 		Node curr = target;
 

@@ -44,6 +44,7 @@ public class MinerTravelToTarget : TravelToTarget<Miner>
 
     public override void Exit(Miner miner)
     {
+		Debug.Log (path.Count);
         path.Clear();
     }
 

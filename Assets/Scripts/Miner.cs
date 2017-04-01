@@ -51,7 +51,7 @@ public class Miner : Agent
         stateMachine.GlobalState = MinerGlobalState.Instance;
         wifeId = this.Id + 1;  // hack hack
 
-        //Location = Location.shack;
+		//Location = Tiles.Shack;
     }
 
     // This method is invoked by the Game object as a result of XNA updates 

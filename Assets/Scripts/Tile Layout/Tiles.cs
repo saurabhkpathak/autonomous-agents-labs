@@ -1,6 +1,6 @@
 ﻿public enum Tiles {
-	Plains = 0,
-	Mountains = 0,
+	Plains = 8,
+	Mountains = 9,
 	OutlawCamp = 4,
     SheriffsOffice = 5,
 	Undertakers = 6,
@@ -8,5 +8,5 @@
 	Bank = 2,
 	Saloon = 3,
     GoldMine = 1,
-    Shack = 0
+    Shack = 10
 }
