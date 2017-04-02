@@ -91,11 +91,11 @@ public class TilingSystem : MonoBehaviour {
 		// bank
 		tiles [9, 4] = 2;
 		//shack
-		tiles[8,6] = 5;
+		tiles[3,4] = 5;
 		//gold mine
-		tiles[5,6] = 4;
+		tiles[1,8] = 4;
 		//saloon
-		tiles[3,1] = 3;
+		tiles[10,9] = 3;
 	}
 
 	private void PlaceTile(int x, int y) {

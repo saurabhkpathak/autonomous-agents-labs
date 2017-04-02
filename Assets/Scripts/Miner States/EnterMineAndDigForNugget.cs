@@ -33,7 +33,7 @@ public sealed class EnterMineAndDigForNugget : State<Miner>
         if (miner.PocketsFull())
         {
 			miner.StateMachine.ChangeState(new MinerTravelToTarget(Tiles.Bank, new VisitBankAndDepositGold(), miner));
-        } else if (miner.Thirsty())
+		} else if (miner.Thirsty() && miner.MoneyInBank > 2)
         {
 			miner.StateMachine.ChangeState(new MinerTravelToTarget(Tiles.Saloon, new QuenchThirst(), miner));
         }
