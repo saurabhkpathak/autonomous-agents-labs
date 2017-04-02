@@ -78,12 +78,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Agent.cs" />
-    <Compile Include="Assets\Scripts\Bob States\CreateState.cs" />
-    <Compile Include="Assets\Scripts\Bob States\WaitState.cs" />
-    <Compile Include="Assets\Scripts\Bob.cs" />
-    <Compile Include="Assets\Scripts\Elsa States\ElsaCreatestate.cs" />
-    <Compile Include="Assets\Scripts\Elsa States\ElsaWaitState.cs" />
-    <Compile Include="Assets\Scripts\Elsa.cs" />
     <Compile Include="Assets\Scripts\LeanPool\Examples\SimpleDelayedPooling.cs" />
     <Compile Include="Assets\Scripts\LeanPool\Examples\SimplePoolBenchmark.cs" />
     <Compile Include="Assets\Scripts\LeanPool\Examples\SimplePooling.cs" />
@@ -99,14 +93,14 @@
     <Compile Include="Assets\Scripts\Miner States\MinerTravelToTarget.cs" />
     <Compile Include="Assets\Scripts\Miner States\QuenchThirst.cs" />
     <Compile Include="Assets\Scripts\Miner States\VisitBankAndDepositGold.cs" />
-    <Compile Include="Assets\Scripts\Miner.cs" />
+    <Compile Include="Assets\Scripts\Agents\Miner.cs" />
     <Compile Include="Assets\Scripts\Outlaw States\DropDeadOutlaw.cs" />
     <Compile Include="Assets\Scripts\Outlaw States\LurkInCamp.cs" />
     <Compile Include="Assets\Scripts\Outlaw States\LurkInCemetery.cs" />
     <Compile Include="Assets\Scripts\Outlaw States\OutlawGlobalState.cs" />
     <Compile Include="Assets\Scripts\Outlaw States\OutlawTravelToTarget.cs" />
     <Compile Include="Assets\Scripts\Outlaw States\RobBank.cs" />
-    <Compile Include="Assets\Scripts\Outlaw.cs" />
+    <Compile Include="Assets\Scripts\Agents\Outlaw.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\AStar.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\MovingUnit.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\Node.cs" />
