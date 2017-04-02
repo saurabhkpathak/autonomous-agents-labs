@@ -79,6 +79,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Agent.cs" />
     <Compile Include="Assets\Scripts\Agents\MinersWife.cs" />
+    <Compile Include="Assets\Scripts\Agents\Sheriff.cs" />
     <Compile Include="Assets\Scripts\Agents\Undertaker.cs" />
     <Compile Include="Assets\Scripts\LeanPool\Examples\SimpleDelayedPooling.cs" />
     <Compile Include="Assets\Scripts\LeanPool\Examples\SimplePoolBenchmark.cs" />
@@ -113,6 +114,12 @@
     <Compile Include="Assets\Scripts\Pathfinding\Unit.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\clickHandler.cs" />
     <Compile Include="Assets\Scripts\Sensing\SenseEvent.cs" />
+    <Compile Include="Assets\Scripts\Sheriff States\CelebrateTheDayInSaloon.cs" />
+    <Compile Include="Assets\Scripts\Sheriff States\DropDeadSheriff.cs" />
+    <Compile Include="Assets\Scripts\Sheriff States\PatrolRandomLocation.cs" />
+    <Compile Include="Assets\Scripts\Sheriff States\SheriffGlobalState.cs" />
+    <Compile Include="Assets\Scripts\Sheriff States\SheriffTravelToTarget.cs" />
+    <Compile Include="Assets\Scripts\Sheriff States\StopByBankAndDepositGold.cs" />
     <Compile Include="Assets\Scripts\State.cs" />
     <Compile Include="Assets\Scripts\StateMachine.cs" />
     <Compile Include="Assets\Scripts\Tile Layout\TileSprite.cs" />
