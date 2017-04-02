@@ -42,11 +42,6 @@ abstract public class Agent : MonoBehaviour
         set { goldCarrying = value; }
     }
 
-    public Agent()
-    {
-        id = agents++;
-    }
-
     abstract public void Update();
     abstract public bool HandleMessage(Telegram telegram);
     abstract public bool HandleSenseEvent(Sense sense);

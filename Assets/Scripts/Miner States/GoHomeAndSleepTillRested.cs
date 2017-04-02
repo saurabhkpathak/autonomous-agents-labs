@@ -49,7 +49,7 @@ public sealed class GoHomeAndSleepTillRested : State<Miner>
             case MessageType.StewsReady:
                 Debug.Log("Message handled by " + miner.Id + " at time ");
                 Debug.Log("Okay Hun, ahm a comin'!");
-                miner.StateMachine.ChangeState(new EatStew());
+                miner.StateMachine.ChangeState(EatStew.Instance);
                 return true;
             default:
                 return false;

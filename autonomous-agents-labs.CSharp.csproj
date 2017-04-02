@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Agent.cs" />
+    <Compile Include="Assets\Scripts\Agents\MinersWife.cs" />
     <Compile Include="Assets\Scripts\LeanPool\Examples\SimpleDelayedPooling.cs" />
     <Compile Include="Assets\Scripts\LeanPool\Examples\SimplePoolBenchmark.cs" />
     <Compile Include="Assets\Scripts\LeanPool\Examples\SimplePooling.cs" />
@@ -94,6 +95,10 @@
     <Compile Include="Assets\Scripts\Miner States\QuenchThirst.cs" />
     <Compile Include="Assets\Scripts\Miner States\VisitBankAndDepositGold.cs" />
     <Compile Include="Assets\Scripts\Agents\Miner.cs" />
+    <Compile Include="Assets\Scripts\MinersWifeStates\CookStew.cs" />
+    <Compile Include="Assets\Scripts\MinersWifeStates\DoHouseWork.cs" />
+    <Compile Include="Assets\Scripts\MinersWifeStates\VisitBathroom.cs" />
+    <Compile Include="Assets\Scripts\MinersWifeStates\WifesGlobalState.cs" />
     <Compile Include="Assets\Scripts\Outlaw States\DropDeadOutlaw.cs" />
     <Compile Include="Assets\Scripts\Outlaw States\LurkInCamp.cs" />
     <Compile Include="Assets\Scripts\Outlaw States\LurkInCemetery.cs" />
