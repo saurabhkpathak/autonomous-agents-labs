@@ -9,6 +9,45 @@ public class MinerTravelToTarget : TravelToTarget<Miner>
         targetState = state;
     }
 
+    public override void Enter(Miner miner)
+    {
+        path = GeneratePathForMiner((int)targetPosition.x, (int)targetPosition.y, miner);
+    }
+
+    public override void Execute(Miner miner)
+    {
+        if (path.Count > 0)
+        {
+            miner.CurrentPosition = new Vector2(path[0].x, path[0].y);
+            miner.GetComponent<Transform>().position = miner.CurrentPosition;
+            path.RemoveAt(0);
+        }
+        else
+        {
+            miner.CurrentPosition = targetPosition;
+
+            State<Miner> previousState = miner.StateMachine.PreviousState;
+            miner.StateMachine.ChangeState(targetState);
+            miner.StateMachine.PreviousState = previousState;
+        }
+    }
+
+    public override void Exit(Miner miner)
+    {
+		Debug.Log (path.Count);
+        path.Clear();
+    }
+
+    public override bool OnMesssage(Miner agent, Telegram telegram)
+    {
+        return false;
+    }
+
+    public override bool OnSenseEvent(Miner agent, Sense sense)
+    {
+        return false;
+    }
+
     public List<Node> GeneratePathForMiner(int x, int y, Miner miner)
     {
         path = null;
@@ -86,44 +125,5 @@ public class MinerTravelToTarget : TravelToTarget<Miner>
         currentPath.Reverse();
 
         return currentPath;
-    }
-
-    public override void Enter(Miner miner)
-    {
-        path = GeneratePathForMiner((int)targetPosition.x, (int)targetPosition.y, miner);
-    }
-
-    public override void Execute(Miner miner)
-    {
-        if (path.Count > 0)
-        {
-            miner.CurrentPosition = new Vector2(path[0].x, path[0].y);
-            miner.GetComponent<Transform>().position = miner.CurrentPosition;
-            path.RemoveAt(0);
-        }
-        else
-        {
-            miner.CurrentPosition = targetPosition;
-
-            State<Miner> previousState = miner.StateMachine.PreviousState;
-            miner.StateMachine.ChangeState(targetState);
-            miner.StateMachine.PreviousState = previousState;
-        }
-    }
-
-    public override void Exit(Miner miner)
-    {
-		Debug.Log (path.Count);
-        path.Clear();
-    }
-
-    public override bool OnMesssage(Miner agent, Telegram telegram)
-    {
-        return false;
-    }
-
-    public override bool OnSenseEvent(Miner agent, Sense sense)
-    {
-        return false;
     }
 }

@@ -79,6 +79,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Agent.cs" />
     <Compile Include="Assets\Scripts\Agents\MinersWife.cs" />
+    <Compile Include="Assets\Scripts\Agents\Undertaker.cs" />
     <Compile Include="Assets\Scripts\LeanPool\Examples\SimpleDelayedPooling.cs" />
     <Compile Include="Assets\Scripts\LeanPool\Examples\SimplePoolBenchmark.cs" />
     <Compile Include="Assets\Scripts\LeanPool\Examples\SimplePooling.cs" />
@@ -95,10 +96,10 @@
     <Compile Include="Assets\Scripts\Miner States\QuenchThirst.cs" />
     <Compile Include="Assets\Scripts\Miner States\VisitBankAndDepositGold.cs" />
     <Compile Include="Assets\Scripts\Agents\Miner.cs" />
-    <Compile Include="Assets\Scripts\MinersWifeStates\CookStew.cs" />
-    <Compile Include="Assets\Scripts\MinersWifeStates\DoHouseWork.cs" />
-    <Compile Include="Assets\Scripts\MinersWifeStates\VisitBathroom.cs" />
-    <Compile Include="Assets\Scripts\MinersWifeStates\WifesGlobalState.cs" />
+    <Compile Include="Assets\Scripts\Miners Wife States\CookStew.cs" />
+    <Compile Include="Assets\Scripts\Miners Wife States\DoHouseWork.cs" />
+    <Compile Include="Assets\Scripts\Miners Wife States\VisitBathroom.cs" />
+    <Compile Include="Assets\Scripts\Miners Wife States\WifesGlobalState.cs" />
     <Compile Include="Assets\Scripts\Outlaw States\DropDeadOutlaw.cs" />
     <Compile Include="Assets\Scripts\Outlaw States\LurkInCamp.cs" />
     <Compile Include="Assets\Scripts\Outlaw States\LurkInCemetery.cs" />
@@ -117,6 +118,11 @@
     <Compile Include="Assets\Scripts\Tile Layout\TileSprite.cs" />
     <Compile Include="Assets\Scripts\Tile Layout\Tiles.cs" />
     <Compile Include="Assets\Scripts\Tile Layout\TilingSystem.cs" />
+    <Compile Include="Assets\Scripts\Undertaker States\DragOffTheBody.cs" />
+    <Compile Include="Assets\Scripts\Undertaker States\HoverInTheOffice.cs" />
+    <Compile Include="Assets\Scripts\Undertaker States\LookForDeadBodies.cs" />
+    <Compile Include="Assets\Scripts\Undertaker States\UndertakerGlobalState.cs" />
+    <Compile Include="Assets\Scripts\Undertaker States\UndertakerTravelToTarget.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\read me.txt" />
