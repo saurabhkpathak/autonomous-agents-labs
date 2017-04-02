@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.5.1f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -98,8 +100,11 @@
     <Compile Include="Assets\Scripts\Miner States\QuenchThirst.cs" />
     <Compile Include="Assets\Scripts\Miner States\VisitBankAndDepositGold.cs" />
     <Compile Include="Assets\Scripts\Miner.cs" />
+    <Compile Include="Assets\Scripts\Outlaw States\DropDeadOutlaw.cs" />
     <Compile Include="Assets\Scripts\Outlaw States\LurkInCamp.cs" />
     <Compile Include="Assets\Scripts\Outlaw States\LurkInCemetery.cs" />
+    <Compile Include="Assets\Scripts\Outlaw States\OutlawGlobalState.cs" />
+    <Compile Include="Assets\Scripts\Outlaw States\OutlawTravelToTarget.cs" />
     <Compile Include="Assets\Scripts\Outlaw States\RobBank.cs" />
     <Compile Include="Assets\Scripts\Outlaw.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\AStar.cs" />
@@ -117,5 +122,6 @@
   <ItemGroup>
     <None Include="Assets\read me.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

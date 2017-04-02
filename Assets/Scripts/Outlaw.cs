@@ -1,35 +1,57 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using UnityEngine;
 
-public class Outlaw : MonoBehaviour {
+public class Outlaw : Agent
+{
+    public int BoredomCountdown = 0;
+    public GameObject tileMap;
 
-	private StateMachine<Outlaw> stateMachine;
+    // Here is the StateMachine that the Outlaw uses to drive the agent's behaviour
+    private StateMachine<Outlaw> stateMachine;
+    public StateMachine<Outlaw> StateMachine
+    {
+        get { return stateMachine; }
+        set { stateMachine = value; }
+    }
 
-	public int createdTime = 0;
-	private int goldCarried = 0;
+    public Outlaw()
+        : base()
+    {
+        stateMachine = new StateMachine<Outlaw>(this);
+        stateMachine.CurrentState = LurkInCamp.Instance;
+        //stateMachine.GlobalState = new OutlawGlobalState();
+        this.CurrentPosition = new Vector2(0, 0);
+        //Location = Location.outlawCamp;
+    }
 
-	public void Awake () {
-		this.stateMachine = new StateMachine<Outlaw>(this);
-		this.stateMachine.Init(this, LurkInCamp.Instance);
-	}
+    // This method is invoked by the Game object as a result of XNA updates 
+    public override void Update()
+    {
+        //if (Location >= 0)
+        //{
+        //    BoredomCountdown -= 1;
+        //}
 
-	public void CreateTime () {
-		this.createdTime++;
-	}
+        stateMachine.Update();
+    }
 
-	public void ChangeState (State<Outlaw> state) {
-		this.stateMachine.ChangeState(state);
-	}
+    public bool Bored()
+    {
+        return (BoredomCountdown <= 0);
+    }
 
-	public void Update () {
-		this.stateMachine.Update();
-	}
+    // This method is invoked when the agent receives a message
+    public override bool HandleMessage(Telegram telegram)
+    {
+        return stateMachine.HandleMessage(telegram);
+    }
 
-	public void RobBank() {
-		goldCarried = goldCarried + Random.Range (1, 11);
-		Debug.Log ("Robbing bank");
-	}
-
-	public int getGoldQuantity() {
-		return goldCarried;
-	}
+    // This method is invoked when the agent senses
+    public override bool HandleSenseEvent(Sense sense)
+    {
+        return stateMachine.HandleSenseEvent(sense);
+    }
 }
