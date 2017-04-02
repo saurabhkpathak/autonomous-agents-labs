@@ -89,14 +89,18 @@ public class TilingSystem : MonoBehaviour {
 		tiles[8, 4] = 1;
 
 		// bank
-		tiles [9, 4] = 2;
+		tiles[9, 4] = 2;
 		//shack
-		tiles[3,4] = 5;
+		tiles[3, 4] = 5;
 		//gold mine
-		tiles[1,8] = 4;
+		tiles[1, 8] = 4;
 		//saloon
-		tiles[10,9] = 3;
-	}
+		tiles[10, 9] = 3;
+        //cemetery
+        tiles[14, 2] = 6;
+        //outlaw camp
+        tiles[7, 0] = 7;
+    }
 
 	private void PlaceTile(int x, int y) {
 		TileSprite tt = TileSprites[tiles[x, y]];

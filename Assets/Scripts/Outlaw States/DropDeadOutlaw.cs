@@ -28,7 +28,7 @@ public class DropDeadOutlaw : State<Outlaw>
     public override void Exit(Outlaw outlaw)
     {
         outlaw.IsDead = false;
-        //outlaw.Location = Tiles.OutlawCamp;
+        outlaw.transform.position = outlaw.tileMap.GetComponent<TilingSystem>().getTilePositionByType(Tiles.OutlawCamp);
 
         Debug.Log("I am back, from dead!");
     }

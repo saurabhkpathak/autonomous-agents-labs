@@ -27,7 +27,7 @@ public class LurkInCamp : State<Outlaw>
 
     public override void Execute(Outlaw outlaw)
     {
-        Debug.Log("Chilling in " + outlaw + ".");
+        Debug.Log("Chilling in " + outlaw.StateMachine.CurrentState.ToString() + ".");
 
         if (outlaw.Bored())
         {
