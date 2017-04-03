@@ -25,17 +25,33 @@ public class TilingSystem : MonoBehaviour {
 			}
 		}
 
-		for (int i = 0; i < MapSizeX; i++) {
-			for (int j = 0; j < MapSizeY; j++) {
-				if (i > 0)
-					grid [i, j].neighbours.Add (grid [i - 1, j]);
-				if (i < MapSizeX - 1)
-					grid [i, j].neighbours.Add (grid [i + 1, j]);
-				if (j > 0)
-					grid [i, j].neighbours.Add (grid [i, j - 1]);
-				if (j < MapSizeY - 1)
-					grid [i, j].neighbours.Add (grid [i, j + 1]);
-			}
+		for (int x = 0; x < MapSizeX; x++) {
+			for (int y = 0; y < MapSizeY; y++) {
+                if (x > 0)
+                {
+                    grid[x, y].neighbours.Add(grid[x - 1, y]);
+                    if (y > 0)
+                        grid[x, y].neighbours.Add(grid[x - 1, y - 1]);
+                    if (y < MapSizeY - 1)
+                        grid[x, y].neighbours.Add(grid[x - 1, y + 1]);
+                }
+
+                // Try Right
+                if (x < MapSizeX - 1)
+                {
+                    grid[x, y].neighbours.Add(grid[x + 1, y]);
+                    if (y > 0)
+                        grid[x, y].neighbours.Add(grid[x + 1, y - 1]);
+                    if (y < MapSizeY - 1)
+                        grid[x, y].neighbours.Add(grid[x + 1, y + 1]);
+                }
+
+                // Try straight up and down
+                if (y > 0)
+                    grid[x, y].neighbours.Add(grid[x, y - 1]);
+                if (y < MapSizeY - 1)
+                    grid[x, y].neighbours.Add(grid[x, y + 1]);
+            }
 		}
 	}
 

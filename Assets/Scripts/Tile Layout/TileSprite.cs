@@ -8,7 +8,21 @@ public class TileSprite {
 	public GameObject tilePrefab;
     public bool isWalkable = true;
 
-	public TileSprite() {
+    private float tileAttenuation;
+    public float TileAttenuation
+    {
+        get { return tileAttenuation; }
+        set { tileAttenuation = value; }
+    }
+
+    private Vector2 tilePosition;
+    public Vector2 Position
+    {
+        get { return tilePosition; }
+        set { tilePosition = value; }
+    }
+
+    public TileSprite() {
         movementCost = 1;
         tileType = Tiles.Plains;
 	}

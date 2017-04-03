@@ -111,6 +111,7 @@
     <Compile Include="Assets\Scripts\Agents\Outlaw.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\AStar.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\Node.cs" />
+    <Compile Include="Assets\Scripts\Pathfinding\Pathfinding.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\Unit.cs" />
     <Compile Include="Assets\Scripts\Sensing\SenseEvent.cs" />
     <Compile Include="Assets\Scripts\Sheriff States\CelebrateTheDayInSaloon.cs" />
