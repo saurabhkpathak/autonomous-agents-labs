@@ -31,8 +31,10 @@ public class MinerTravelToTarget : TravelToTarget<Miner>
     {
         if (path.Count > 0)
         {
-            miner.CurrentPosition = new Vector2(path[0].x, path[0].y);
-            miner.GetComponent<Transform>().position = miner.CurrentPosition;
+            Vector2 nextPosition = new Vector2(path[0].x, path[0].y);
+            //miner.GetComponent<Transform>().position = miner.CurrentPosition;
+            miner.GetComponent<Transform>().position = Vector3.Lerp(miner.CurrentPosition, nextPosition, 15f);
+            miner.CurrentPosition = nextPosition;
             path.RemoveAt(0);
         }
         else

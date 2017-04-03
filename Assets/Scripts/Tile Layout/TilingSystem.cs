@@ -114,13 +114,13 @@ public class TilingSystem : MonoBehaviour {
 		TileSprite tt = TileSprites[tiles[x, y]];
 		GameObject go = Instantiate(tt.tilePrefab, new Vector3(x, y, 0), Quaternion.identity);
 
-		if(tt.tileType == Tiles.Plains)
-		{
-			clickHandler ch = go.GetComponent<clickHandler>();
-			ch.tileX = x;
-			ch.tileY = y;
-			ch.map = this;
-		}
+		//if(tt.tileType == Tiles.Plains)
+		//{
+		//	clickHandler ch = go.GetComponent<clickHandler>();
+		//	ch.tileX = x;
+		//	ch.tileY = y;
+		//	ch.map = this;
+		//}
 	}
 
 	private void AddTilesToMap() {
@@ -137,78 +137,6 @@ public class TilingSystem : MonoBehaviour {
     {
         return new Vector3(x, y, 0);
     }
-
-    public void MoveUnitTo(int x, int y) {
-		//selectedUnit.transform.position = new Vector3 (x, y, 0);
-        selectedUnit.GetComponent<Unit>().currentPath = GeneratePathTo(x, y);
-    }
-
-	public List<Node> GeneratePathTo(int x, int y) {
-		selectedUnit.GetComponent<Unit> ().currentPath = null;
-
-		if( UnitCanEnterTile(x,y) == false ) {
-			return null;
-		}
-
-		Dictionary<Node, float> dist = new Dictionary<Node, float> ();
-		Dictionary<Node, Node> prev = new Dictionary<Node, Node > ();
-
-		List<Node> unvisited = new List<Node> ();
-
-		Node source = grid [selectedUnit.GetComponent<Unit> ().tileX, selectedUnit.GetComponent<Unit> ().tileY];
-		Node target = grid [x, y];
-		
-		dist [source] = 0;
-		prev [source] = null;
-
-		foreach (Node v in grid) {
-			if (v != source) {
-				dist [v] = Mathf.Infinity;
-				prev [v] = null;
-
-			}
-			unvisited.Add (v);
-		}
-
-		while (unvisited.Count > 0) {
-			Node u = null;
-
-			foreach (Node possibleU in unvisited) {
-				if (u == null || dist[possibleU] < dist[u]) {
-					u = possibleU;
-				}
-			}
-
-			if (u == target) {
-				break;
-			}
-
-			unvisited.Remove (u);
-
-			foreach (Node v in u.neighbours) {
-				//float alt = dist [u] + u.DistanceTo (v);
-				float alt = dist[u] + CostToEnterTile(u.x, u.y, v.x, v.y);
-				if (alt < dist [v]) {
-					dist [v] = alt;
-					prev [v] = u;
-				}
-			}
-		}
-		if (prev [target] == null) {
-			return null;
-		}
-		List<Node> currentPath = new List<Node> ();
-		Node curr = target;
-
-		while (curr != null) {
-			currentPath.Add (curr);
-			curr = prev [curr];
-		}
-
-		currentPath.Reverse ();
-
-        return currentPath;
-	}
 
 	public float CostToEnterTile(int sourceX, int sourceY, int targetX, int targetY) {
 
@@ -238,11 +166,7 @@ public class TilingSystem : MonoBehaviour {
 	}
 
     public void Start() {
-        selectedUnit.GetComponent<Unit>().tileX = (int)selectedUnit.transform.position.x;
-        selectedUnit.GetComponent<Unit>().tileY = (int)selectedUnit.transform.position.y;
-        selectedUnit.GetComponent<Unit>().map = this;
-
-		DefaultTiles ();
+        DefaultTiles ();
 		SetTiles ();
         GeneratePathfindingGraph();
 		AddTilesToMap ();

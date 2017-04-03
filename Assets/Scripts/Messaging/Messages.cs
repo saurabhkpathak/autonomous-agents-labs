@@ -37,35 +37,35 @@ public static class Message
 
     public static void DispatchMessage(double delay, int sender, int receiver, MessageType messageType)
     {
-        //Agent sendingAgent = AgentManager.GetAgent(sender);
-        //Agent receivingAgent = AgentManager.GetAgent(receiver);
+        Agent sendingAgent = AgentManager.GetAgent(sender);
+        Agent receivingAgent = AgentManager.GetAgent(receiver);
 
-        //Telegram telegram = new Telegram(0, sender, receiver, messageType);
-        //if (delay <= 0.0f)
-        //{
-        //    Printer.PrintMessageData("Instant telegram dispatched by " + sender + " for " + receiver + " message is " + MessageToString(messageType));
-        //    SendMessage(receivingAgent, telegram);
-        //}
-        //else
-        //{
-        //    telegram.DispatchTime = (int)gameTime.TotalGameTime.Ticks + delay;
-        //    telegramQueue.Add(telegram);
-        //    Printer.PrintMessageData("Delayed telegram from " + sender + " recorded at time " + gameTime.TotalGameTime.Ticks);
-        //}
+        Telegram telegram = new Telegram(0, sender, receiver, messageType);
+        if (delay <= 0.0f)
+        {
+            Debug.Log("Instant telegram dispatched by " + sender + " for " + receiver + " message is " + MessageToString(messageType));
+            SendMessage(receivingAgent, telegram);
+        }
+        else
+        {
+            //telegram.DispatchTime = (int)gameTime.TotalGameTime.Ticks + delay;
+            telegramQueue.Add(telegram);
+            //Debug.Log("Delayed telegram from " + sender + " recorded at time " + gameTime.TotalGameTime.Ticks);
+        }
     }
 
     // This sends any messages that are due for delivery; invoked at each tick by the game's Update() method
     public static void SendDelayedMessages()
     {
-        //for (int i = 0; i < telegramQueue.Count; i++)
-        //{
-        //    if (telegramQueue[i].DispatchTime <= gameTime.TotalGameTime.Ticks)
-        //    {
-        //        Agent receivingAgent = AgentManager.GetAgent(telegramQueue[i].Receiver);
-        //        SendMessage(receivingAgent, telegramQueue[i]);
-        //        telegramQueue.RemoveAt(i);
-        //    }
-        //}
+        for (int i = 0; i < telegramQueue.Count; i++)
+        {
+            //if (telegramQueue[i].DispatchTime <= gameTime.TotalGameTime.Ticks)
+            {
+                Agent receivingAgent = AgentManager.GetAgent(telegramQueue[i].Receiver);
+                SendMessage(receivingAgent, telegramQueue[i]);
+                telegramQueue.RemoveAt(i);
+            }
+        }
     }
 
     // Attempt to send a message to a particular agent; called by the preceding two methods -- don't call this from your own agents
