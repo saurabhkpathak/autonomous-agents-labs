@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
+﻿using UnityEngine;
 
 public sealed class EnterMineAndDigForNugget : State<Miner>
 {
@@ -32,10 +28,11 @@ public sealed class EnterMineAndDigForNugget : State<Miner>
         Debug.Log("Pickin' up a nugget");
         if (miner.PocketsFull())
         {
-			miner.StateMachine.ChangeState(new MinerTravelToTarget(Tiles.Bank, new VisitBankAndDepositGold(), miner));
-		} else if (miner.Thirsty() && miner.MoneyInBank > 2)
+            miner.StateMachine.ChangeState(new MinerTravelToTarget(Tiles.Bank, VisitBankAndDepositGold.Instance, miner));
+        }
+        else if (miner.Thirsty() && miner.MoneyInBank > 2)
         {
-			miner.StateMachine.ChangeState(new MinerTravelToTarget(Tiles.Saloon, new QuenchThirst(), miner));
+            miner.StateMachine.ChangeState(new MinerTravelToTarget(Tiles.Saloon, QuenchThirst.Instance, miner));
         }
     }
 

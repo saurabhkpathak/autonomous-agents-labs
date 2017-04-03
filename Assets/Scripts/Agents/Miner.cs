@@ -8,7 +8,6 @@ public class Miner : Agent
     public int ComfortLevel = 5;
     public int TirednessThreshold = 5;
 
-    // Here is the StateMachine that the Miner uses to drive the agent's behaviour
     private StateMachine<Miner> stateMachine;
     public StateMachine<Miner> StateMachine
     {
@@ -48,18 +47,15 @@ public class Miner : Agent
     {
         stateMachine = new StateMachine<Miner>(this);
         stateMachine.CurrentState = GoHomeAndSleepTillRested.Instance;
-        //stateMachine.GlobalState = MinerGlobalState.Instance;
-        wifeId = this.Id + 1;  // hack hack
-        this.CurrentPosition = new Vector2(0, 0);
-
-		//Location = Tiles.Shack;
+        stateMachine.GlobalState = MinerGlobalState.Instance;
+        wifeId = Id + 1;
+        CurrentPosition = new Vector2(0, 0);
     }
 
-    // This method is invoked by the Game object as a result of XNA updates 
     public override void Update()
     {
         Vector2 shackPosition = tileMap.GetComponent<TilingSystem>().getTilePositionByType(Tiles.Shack);
-        if (this.CurrentPosition != shackPosition)
+        if (CurrentPosition != (Vector2)tileMap.GetComponent<TilingSystem>().getTilePositionByType(Tiles.Shack))
         {
             howThirsty += 1;
         }

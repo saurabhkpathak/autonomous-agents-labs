@@ -3,7 +3,20 @@ using UnityEngine;
 
 public class MinerTravelToTarget : TravelToTarget<Miner>
 {
-	public MinerTravelToTarget(Tiles target, State<Miner> state, Miner miner)
+    static readonly MinerTravelToTarget instance = new MinerTravelToTarget();
+
+    public static MinerTravelToTarget Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
+
+    static MinerTravelToTarget() { }
+    private MinerTravelToTarget() { }
+
+    public MinerTravelToTarget(Tiles target, State<Miner> state, Miner miner)
     {
         targetPosition = miner.tileMap.GetComponent<TilingSystem>().getTilePositionByType(target);
         targetState = state;
@@ -34,7 +47,6 @@ public class MinerTravelToTarget : TravelToTarget<Miner>
 
     public override void Exit(Miner miner)
     {
-		Debug.Log (path.Count);
         path.Clear();
     }
 

@@ -28,6 +28,7 @@ public class DropDeadSheriff : State<Sheriff>
     public override void Exit(Sheriff sheriff)
     {
         sheriff.IsDead = false;
+        sheriff.transform.position = sheriff.tileMap.GetComponent<TilingSystem>().getTilePositionByType(Tiles.SheriffsOffice);
         //sheriff.Location = Location.sheriffsOffice;
 
         Debug.Log("It's a miracle, I am alive!");

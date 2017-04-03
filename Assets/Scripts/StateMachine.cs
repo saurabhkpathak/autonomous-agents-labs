@@ -21,12 +21,12 @@ public class StateMachine<T>
     }
 
     // The agent's global state is always executed, if it exists
-    //private State<T> globalState = null;
-    //public State<T> GlobalState
-    //{
-    //    get { return globalState; }
-    //    set { globalState = value; }
-    //}
+    private State<T> globalState = null;
+    public State<T> GlobalState
+    {
+        get { return globalState; }
+        set { globalState = value; }
+    }
 
     // What a lovely constructor
     public StateMachine(T agent)
@@ -37,10 +37,10 @@ public class StateMachine<T>
     // This is called by the Agent whenever the Game invokes the Agent's Update() method
     public void Update()
     {
-        //if (globalState != null)
-        //{
-        //    globalState.Execute(owner);
-        //}
+        if (globalState != null)
+        {
+            globalState.Execute(owner);
+        }
         if (currentState != null)
         {
             currentState.Execute(owner);
@@ -51,14 +51,14 @@ public class StateMachine<T>
     // via the current state
     public bool HandleMessage(Telegram telegram)
     {
-        //if (globalState != null)
-        //{
-        //    if (globalState.OnMesssage(owner, telegram))
-        //    {
-        //        return true;
-        //    }
+        if (globalState != null)
+        {
+            if (globalState.OnMesssage(owner, telegram))
+            {
+                return true;
+            }
 
-        //}
+        }
         if (currentState != null)
         {
             if (currentState.OnMesssage(owner, telegram))
@@ -72,14 +72,14 @@ public class StateMachine<T>
     // Handle sense event
     public bool HandleSenseEvent(Sense sense)
     {
-        //if (globalState != null)
-        //{
-        //    if (globalState.OnSenseEvent(owner, sense))
-        //    {
-        //        return true;
-        //    }
+        if (globalState != null)
+        {
+            if (globalState.OnSenseEvent(owner, sense))
+            {
+                return true;
+            }
 
-        //}
+        }
         if (currentState != null)
         {
             if (currentState.OnSenseEvent(owner, sense))
@@ -115,7 +115,7 @@ public class StateMachine<T>
     {
         this.currentState = null;
         this.previousState = null;
-        //this.globalState = null;
+        this.globalState = null;
     }
 
     public void Init(T agent, State<T> startState)

@@ -1,11 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class VisitBankAndDepositGold : State<Miner>
 {
+    static readonly VisitBankAndDepositGold instance = new VisitBankAndDepositGold();
+
+    public static VisitBankAndDepositGold Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
+
+    static VisitBankAndDepositGold() { }
+    private VisitBankAndDepositGold() { }
+
     public override void Enter(Miner miner)
     {
         Debug.Log("Here is the bank. Yes siree");
