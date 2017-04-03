@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class TilingSystem : MonoBehaviour {
 
@@ -7,6 +8,7 @@ public class TilingSystem : MonoBehaviour {
 	public TileSprite[] TileSprites;
     public int MapSizeX, MapSizeY;
 	private TileSprite[,] _map;
+    public ArrayList locationsList = new ArrayList();
 
 	public Node[,] grid;
 
@@ -70,36 +72,42 @@ public class TilingSystem : MonoBehaviour {
 		{
 			for(int y = 0; y < MapSizeY; y++)
 			{
-				tiles[x, y] = 0;
+				tiles[x, y] = 5;
 			}
 		}
 	}
 
 	//set the tiles of the map to what is specified in TileSprites
 	private void SetTiles() {
-		tiles[4, 4] = 1;
-		tiles[5, 4] = 1;
-		tiles[6, 4] = 1;
-		tiles[7, 4] = 1;
-		tiles[8, 4] = 1;
+		tiles[4, 4] = 3;
+		tiles[5, 4] = 3;
+		tiles[6, 4] = 3;
+		tiles[7, 4] = 3;
+		tiles[8, 4] = 3;
 
-		tiles[4, 5] = 1;
-		tiles[4, 4] = 1;
-		tiles[8, 5] = 1;
-		tiles[8, 4] = 1;
+		tiles[4, 5] = 3;
+		tiles[4, 4] = 3;
+		tiles[8, 5] = 3;
+		tiles[8, 4] = 3;
 
 		// bank
-		tiles[9, 4] = 2;
+		tiles[9, 4] = 0;
+        locationsList.Add(new Vector2(9, 4));
 		//shack
-		tiles[3, 4] = 5;
-		//gold mine
-		tiles[1, 8] = 4;
-		//saloon
-		tiles[10, 9] = 3;
+		tiles[3, 4] = 7;
+        locationsList.Add(new Vector2(3, 4));
+        //gold mine
+        tiles[1, 8] = 2;
+        locationsList.Add(new Vector2(1, 8));
+        //saloon
+        tiles[10, 9] = 6;
+        locationsList.Add(new Vector2(10, 9));
         //cemetery
-        tiles[14, 2] = 6;
+        tiles[14, 2] = 1;
+        locationsList.Add(new Vector2(14, 2));
         //outlaw camp
-        tiles[7, 0] = 7;
+        tiles[7, 0] = 4;
+        locationsList.Add(new Vector2(7, 0));
     }
 
 	private void PlaceTile(int x, int y) {
@@ -233,7 +241,7 @@ public class TilingSystem : MonoBehaviour {
         selectedUnit.GetComponent<Unit>().tileX = (int)selectedUnit.transform.position.x;
         selectedUnit.GetComponent<Unit>().tileY = (int)selectedUnit.transform.position.y;
         selectedUnit.GetComponent<Unit>().map = this;
-        //_map = new TileSprite[MapSizeX, MapSizeY];
+
 		DefaultTiles ();
 		SetTiles ();
         GeneratePathfindingGraph();

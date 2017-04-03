@@ -1,12 +1,12 @@
 ﻿public enum Tiles {
-	Plains,
-	Mountains,
-	OutlawCamp,
-    SheriffsOffice,
-	Undertakers,
-	Cemetery,
-	Bank,
-	Saloon,
+    Bank,
+    Cemetery,
     GoldMine,
-    Shack
+    Mountains,
+    OutlawCamp,
+    Plains,
+    Saloon,
+    Shack,
+    SheriffsOffice,
+    Undertakers
 }

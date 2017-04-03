@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Outlaw : Agent
 {
@@ -21,19 +17,18 @@ public class Outlaw : Agent
     {
         stateMachine = new StateMachine<Outlaw>(this);
         stateMachine.CurrentState = LurkInCamp.Instance;
-        //stateMachine.GlobalState = new OutlawGlobalState();
-        this.CurrentPosition = new Vector2(0, 0);
-        //Location = Location.outlawCamp;
+        stateMachine.GlobalState = OutlawGlobalState.Instance;
+        CurrentPosition = new Vector2(0, 0);
     }
 
-    // This method is invoked by the Game object as a result of XNA updates 
     public override void Update()
     {
-        //if (Location >= 0)
-        //{
-        //    BoredomCountdown -= 1;
-        //}
+        if (tileMap.GetComponent<TilingSystem>().locationsList.Contains(CurrentPosition))
+        {
+            BoredomCountdown -= 1;
+        }
 
+        BoredomCountdown -= 1;
         stateMachine.Update();
     }
 

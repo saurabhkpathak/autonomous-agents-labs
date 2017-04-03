@@ -54,8 +54,7 @@ public class Miner : Agent
 
     public override void Update()
     {
-        Vector2 shackPosition = tileMap.GetComponent<TilingSystem>().getTilePositionByType(Tiles.Shack);
-        if (CurrentPosition != (Vector2)tileMap.GetComponent<TilingSystem>().getTilePositionByType(Tiles.Shack))
+        if (tileMap.GetComponent<TilingSystem>().locationsList.Contains(CurrentPosition))
         {
             howThirsty += 1;
         }
