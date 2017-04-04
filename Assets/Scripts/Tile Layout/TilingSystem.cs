@@ -4,7 +4,7 @@ using System.Collections;
 
 public class TilingSystem : MonoBehaviour {
 
-    int[,] tiles;
+    public int[,] tiles;
 	public TileSprite[] TileSprites;
     public int MapSizeX, MapSizeY;
 	private TileSprite[,] _map;
@@ -14,7 +14,7 @@ public class TilingSystem : MonoBehaviour {
 
 	public GameObject selectedUnit;
 
-	void GeneratePathfindingGraph() {
+    void GeneratePathfindingGraph() {
 		grid = new Node[MapSizeX, MapSizeY];
 
 		for (int i = 0; i < MapSizeX; i++) {
@@ -59,12 +59,8 @@ public class TilingSystem : MonoBehaviour {
 		return TileSprites[0].tilePrefab.GetComponent<SpriteRenderer> ().sprite.bounds.size.x;
 	}
 
-	private TileSprite getTile(Tiles tile) {
-		foreach(TileSprite tileSprite in TileSprites) {
-			if (tileSprite.tileType == tile)
-				return tileSprite;
-		}
-		return TileSprites [0];
+	private int getTile(int x, int y) {
+        return tiles[x, y];
 	}
 
 	public Vector3 getTilePositionByType(Tiles tile) {
@@ -188,4 +184,8 @@ public class TilingSystem : MonoBehaviour {
 		AddTilesToMap ();
     }
 
+    void Update()
+    {
+        SenseEvent.UpdateSensors(this);
+    }
 }

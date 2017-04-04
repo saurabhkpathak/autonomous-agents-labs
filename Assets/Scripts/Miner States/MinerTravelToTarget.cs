@@ -24,7 +24,9 @@ public class MinerTravelToTarget : TravelToTarget<Miner>
 
     public override void Enter(Miner miner)
     {
-        path = GeneratePathForMiner((int)targetPosition.x, (int)targetPosition.y, miner);
+        //path = GeneratePathForMiner((int)targetPosition.x, (int)targetPosition.y, miner);
+
+        path = pathFinder.FindPath(miner.CurrentPosition, targetPosition, miner.tileMap.GetComponent<TilingSystem>());
     }
 
     public override void Execute(Miner miner)
