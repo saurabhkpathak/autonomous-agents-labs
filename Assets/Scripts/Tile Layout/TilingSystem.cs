@@ -186,6 +186,18 @@ public class TilingSystem : MonoBehaviour {
 		SetTiles ();
         GeneratePathfindingGraph();
 		AddTilesToMap ();
+
+        GameObject Bob = GameObject.Find("Bob");
+        GameObject Elsa = GameObject.Find("Elsa");
+        GameObject Jesse = GameObject.Find("Jesse");
+        GameObject Wyatt = GameObject.Find("Wyatt");
+        GameObject Undertaker = GameObject.Find("Undertaker");
+
+        AgentManager.AddAgent(Bob.GetComponent<Miner>());
+        AgentManager.AddAgent(Elsa.GetComponent<MinersWife>());
+        AgentManager.AddAgent(Jesse.GetComponent<Outlaw>());
+        AgentManager.AddAgent(Wyatt.GetComponent<Sheriff>());
+        AgentManager.AddAgent(Undertaker.GetComponent<Undertaker>());
     }
 
 }

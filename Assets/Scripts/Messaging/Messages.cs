@@ -33,7 +33,6 @@ public struct Telegram
 public static class Message
 {
     public static List<Telegram> telegramQueue = new List<Telegram>();
-    //public static GameTime gameTime;
 
     public static void DispatchMessage(double delay, int sender, int receiver, MessageType messageType)
     {

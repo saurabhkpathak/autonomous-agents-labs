@@ -1,4 +1,6 @@
-﻿public enum SenseType
+﻿using UnityEngine;
+
+public enum SenseType
 {
     Sight,
     Hearing,
@@ -28,28 +30,28 @@ public static class SenseEvent
     public static void UpdateSensors()
     {
         // Agents pairwise check
-        //for (int i = 0; i < AgentManager.GetCount(); ++i)
-        //{
-        //    Agent a1 = AgentManager.GetAgent(i);
-        //    for (int j = 0; j < AgentManager.GetCount(); ++j)
-        //    {
-        //        if (i != j)
-        //        {
-        //            Agent a2 = AgentManager.GetAgent(j);
+        for (int i = 0; i < AgentManager.GetCount(); ++i)
+        {
+            Agent a1 = AgentManager.GetAgent(i);
+            for (int j = 0; j < AgentManager.GetCount(); ++j)
+            {
+                if (i != j)
+                {
+                    Agent a2 = AgentManager.GetAgent(j);
 
-        //            // If close enough
-        //            if (Vector2.Distance(a1.CurrentPosition, a2.CurrentPosition) < SENSE_RANGE)
-        //            {
-        //                // Propogate the sense
-        //                if (propogator.PropogateSense(a1.CurrentPosition, a2.CurrentPosition))
-        //                {
-        //                    // Sense the agent
-        //                    Sense sense = new Sense(a2.Id, a1.Id, SenseType.Sight);
-        //                    a1.HandleSenseEvent(sense);
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
+                    // If close enough
+                    if (Vector2.Distance(a1.CurrentPosition, a2.CurrentPosition) < SENSE_RANGE)
+                    {
+                        // Propogate the sense
+                        if (propogator.PropogateSense(a1.CurrentPosition, a2.CurrentPosition))
+                        {
+                            // Sense the agent
+                            Sense sense = new Sense(a2.Id, a1.Id, SenseType.Sight);
+                            a1.HandleSenseEvent(sense);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

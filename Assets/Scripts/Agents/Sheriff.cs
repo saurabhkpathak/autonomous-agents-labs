@@ -19,7 +19,7 @@ public class Sheriff : Agent
         set { moneyInBank = value; }
     }
 
-    public Sheriff()
+    public Sheriff() : base()
     {
         stateMachine = new StateMachine<Sheriff>(this);
         stateMachine.CurrentState = PatrolRandomLocation.Instance;

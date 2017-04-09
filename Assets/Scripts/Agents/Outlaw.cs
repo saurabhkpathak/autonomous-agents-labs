@@ -13,7 +13,7 @@ public class Outlaw : Agent
         set { stateMachine = value; }
     }
 
-    public Outlaw()
+    public Outlaw() : base()
     {
         stateMachine = new StateMachine<Outlaw>(this);
         stateMachine.CurrentState = LurkInCamp.Instance;

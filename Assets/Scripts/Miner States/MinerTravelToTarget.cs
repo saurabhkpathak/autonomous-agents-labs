@@ -25,6 +25,10 @@ public class MinerTravelToTarget : TravelToTarget<Miner>
     public override void Enter(Miner miner)
     {
         path = GeneratePathForMiner((int)targetPosition.x, (int)targetPosition.y, miner);
+        for (int i = 0; i < path.Count; i++)
+        {
+            Debug.DrawLine(new Vector3(path[i].x, path[i].y), new Vector3(path[i + 1].x, path[i + 1].y), Color.red, 2, false);
+        }
     }
 
     public override void Execute(Miner miner)

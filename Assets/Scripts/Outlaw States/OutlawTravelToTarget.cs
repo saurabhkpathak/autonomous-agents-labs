@@ -26,7 +26,10 @@ public class OutlawTravelToTarget : TravelToTarget<Outlaw>
     {
         path = GeneratePathForOutlaw((int)targetPosition.x, (int)targetPosition.y, outlaw);
 
-        //Debug.Log("Walkin' to " + LocationProperties.ToString(LocationProperties.GetLocation(targetPosition)) + ".");
+        for (int i = 0; i < path.Count; i++)
+        {
+            Debug.DrawLine(new Vector3(path[i].x, path[i].y), new Vector3(path[i + 1].x, path[i + 1].y), Color.red, 2, false);
+        }
     }
 
     public override void Execute(Outlaw outlaw)

@@ -43,7 +43,7 @@ public class Miner : Agent
         set { howFatigued = value; }
     }
 
-    public Miner()
+    public Miner() : base()
     {
         stateMachine = new StateMachine<Miner>(this);
         stateMachine.CurrentState = GoHomeAndSleepTillRested.Instance;

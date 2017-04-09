@@ -17,8 +17,7 @@ public class Undertaker : Agent
         set { stateMachine = value; }
     }
 
-    public Undertaker()
-        : base()
+    public Undertaker() : base()
     {
         stateMachine = new StateMachine<Undertaker>(this);
         stateMachine.CurrentState = HoverInTheOffice.Instance;
