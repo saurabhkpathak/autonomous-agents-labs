@@ -105,6 +105,15 @@ public class TilingSystem : MonoBehaviour {
 		tiles[4, 4] = 3;
 		tiles[8, 5] = 3;
 		tiles[8, 4] = 3;
+		tiles[12, 5] = 3;
+		tiles[9, 7] = 3;
+		tiles[4, 2] = 3;
+		tiles[10, 7] = 3;
+		tiles[11, 7] = 3;
+		tiles[12, 7] = 3;
+		tiles[12, 6] = 3;
+		tiles[2, 7] = 3;
+		tiles[6, 3] = 3;
 
 		// bank
 		tiles[9, 4] = 0;
@@ -124,6 +133,12 @@ public class TilingSystem : MonoBehaviour {
         //outlaw camp
         tiles[7, 0] = 4;
         locationsList.Add(new Vector2(7, 0));
+		//sheriff's office
+		tiles[5, 7] = 8;
+		locationsList.Add(new Vector2(3, 4));
+		//undertakers
+		tiles[9, 1] = 9;
+		locationsList.Add(new Vector2(9, 1));
     }
 
 	private void PlaceTile(int x, int y) {
