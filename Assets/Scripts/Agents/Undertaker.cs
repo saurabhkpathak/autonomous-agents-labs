@@ -21,7 +21,7 @@ public class Undertaker : Agent
     {
         stateMachine = new StateMachine<Undertaker>(this);
         stateMachine.CurrentState = HoverInTheOffice.Instance;
-        //stateMachine.GlobalState = new UndertakerGlobalState();
+        stateMachine.GlobalState = UndertakerGlobalState.Instance;
 
         //Location = Location.undertakers;
     }
