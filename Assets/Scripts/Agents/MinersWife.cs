@@ -36,7 +36,7 @@ public class MinersWife : Agent
     {
         stateMachine = new StateMachine<MinersWife>(this);
         stateMachine.CurrentState = DoHouseWork.Instance;
-        //stateMachine.GlobalState = new WifesGlobalState();
+        stateMachine.GlobalState = WifesGlobalState.Instance;
         husbandId = this.Id - 1;  // hack hack
 
         //Location = Location.shack;

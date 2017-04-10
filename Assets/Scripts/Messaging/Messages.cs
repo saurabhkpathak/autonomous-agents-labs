@@ -47,9 +47,7 @@ public static class Message
         }
         else
         {
-            //telegram.DispatchTime = (int)gameTime.TotalGameTime.Ticks + delay;
             telegramQueue.Add(telegram);
-            //Debug.Log("Delayed telegram from " + sender + " recorded at time " + gameTime.TotalGameTime.Ticks);
         }
     }
 
@@ -58,12 +56,9 @@ public static class Message
     {
         for (int i = 0; i < telegramQueue.Count; i++)
         {
-            //if (telegramQueue[i].DispatchTime <= gameTime.TotalGameTime.Ticks)
-            {
-                Agent receivingAgent = AgentManager.GetAgent(telegramQueue[i].Receiver);
-                SendMessage(receivingAgent, telegramQueue[i]);
-                telegramQueue.RemoveAt(i);
-            }
+            Agent receivingAgent = AgentManager.GetAgent(telegramQueue[i].Receiver);
+            SendMessage(receivingAgent, telegramQueue[i]);
+            telegramQueue.RemoveAt(i);
         }
     }
 
