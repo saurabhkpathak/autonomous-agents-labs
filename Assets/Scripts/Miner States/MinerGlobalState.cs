@@ -1,39 +1,34 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public sealed class MinerGlobalState : State<Miner>
 {
+    static readonly MinerGlobalState instance = new MinerGlobalState();
 
-	static readonly MinerGlobalState instance = new MinerGlobalState();
+    public static MinerGlobalState Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
 
-	public static MinerGlobalState Instance
-	{
-		get
-		{
-			return instance;
-		}
-	}
+    static MinerGlobalState() { }
+    private MinerGlobalState() { }
 
-	static MinerGlobalState() { }
-	private MinerGlobalState() { }
+    public override void Enter(Miner agent)
+    {
+    }
 
-	public override void Enter(Miner agent)
-	{
-		Debug.Log("Gathering creative energies...");
-	}
+    public override void Execute(Miner agent)
+    {
+    }
 
-	public override void Execute(Miner agent)
-	{
-		agent.StateMachine.ChangeState(GoHomeAndSleepTillRested.Instance);
-	}
+    public override void Exit(Miner agent)
+    {
+    }
 
-	public override void Exit(Miner agent)
-	{
-		Debug.Log("...creativity spent!");
-	}
-
-	public override bool OnMesssage(Miner agent, Telegram telegram)
-	{
+    public override bool OnMesssage(Miner agent, Telegram telegram)
+    {
         switch (telegram.messageType)
         {
             case MessageType.SheriffEncountered:
@@ -45,8 +40,8 @@ public sealed class MinerGlobalState : State<Miner>
         }
     }
 
-	public override bool OnSenseEvent(Miner agent, Sense sense)
-	{
+    public override bool OnSenseEvent(Miner agent, Sense sense)
+    {
         return false;
-	}
+    }
 }

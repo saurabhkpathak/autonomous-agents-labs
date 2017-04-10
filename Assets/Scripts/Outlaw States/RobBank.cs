@@ -1,41 +1,48 @@
 ﻿using System;
 using UnityEngine;
 
-public sealed class RobBank : State<Outlaw> {
+public class RobBank : State<Outlaw>
+{
+    static readonly RobBank instance = new RobBank();
 
-	static readonly RobBank instance = new RobBank();
+    public static RobBank Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
 
-	public static RobBank Instance {
-		get {
-			return instance;
-		}
-	}
+    static RobBank() { }
+    private RobBank() { }
 
-	static RobBank () {}
-	private RobBank () {}
+    static System.Random rand = new System.Random();
 
-	public override void Enter (Outlaw agent) {
-		Debug.Log("Outlaw is going to rob a bank");
-	}
+    public override void Enter(Outlaw outlaw)
+    {
+        Debug.Log("Arrived in bank, Let's EARN some money!");
+    }
 
-	public override void Execute (Outlaw agent) {
-		agent.CreateTime();
-		agent.RobBank ();
-		Debug.Log("Outlaw robbed " + agent.getGoldQuantity() + " gold nuggets");
-		agent.ChangeState(LurkInCamp.Instance);
-	}
+    public override void Execute(Outlaw outlaw)
+    {
+        outlaw.GoldCarrying += rand.Next(1, 10);
+        Debug.Log("Total harvest now: " + outlaw.GoldCarrying);
 
-	public override void Exit (Outlaw agent) {
-		Debug.Log("Outlaw is leaving bank after robbing it");
-	}
+        outlaw.StateMachine.ChangeState(new OutlawTravelToTarget(outlaw.StateMachine.PreviousState.GetType() == typeof(LurkInCamp) ? Tiles.OutlawCamp : Tiles.Cemetery, outlaw.StateMachine.PreviousState, outlaw));
+    }
+
+    public override void Exit(Outlaw outlaw)
+    {
+        Debug.Log("Breaking away from the bank.");
+    }
 
     public override bool OnMesssage(Outlaw agent, Telegram telegram)
     {
-        throw new NotImplementedException();
+        return false;
     }
 
     public override bool OnSenseEvent(Outlaw agent, Sense sense)
     {
-        throw new NotImplementedException();
+        return false;
     }
 }

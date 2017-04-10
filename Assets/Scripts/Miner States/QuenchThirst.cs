@@ -1,11 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class QuenchThirst : State<Miner>
 {
+    static readonly QuenchThirst instance = new QuenchThirst();
+
+    public static QuenchThirst Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
+
+    static QuenchThirst() { }
+    private QuenchThirst() { }
+
     public override void Enter(Miner miner)
     {
         Debug.Log("Boy, ah sure is thusty! Arrived the saloon");

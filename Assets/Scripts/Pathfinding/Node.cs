@@ -6,7 +6,11 @@ public class Node {
 	public int x;
 	public int y;
 
-	public Node () {
+    public int gCost;
+    public int hCost;
+    public Node parent;
+
+    public Node () {
 		neighbours = new List<Node>();
 	}
 

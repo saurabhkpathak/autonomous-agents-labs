@@ -1,15 +1,69 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class MinerTravelToTarget : TravelToTarget<Miner>
 {
-	public MinerTravelToTarget(Tiles target, State<Miner> state, Miner miner)
+    static readonly MinerTravelToTarget instance = new MinerTravelToTarget();
+
+    public static MinerTravelToTarget Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
+
+    static MinerTravelToTarget() { }
+    private MinerTravelToTarget() { }
+
+    public MinerTravelToTarget(Tiles target, State<Miner> state, Miner miner)
     {
         targetPosition = miner.tileMap.GetComponent<TilingSystem>().getTilePositionByType(target);
         targetState = state;
+    }
+
+    public override void Enter(Miner miner)
+    {
+        path = GeneratePathForMiner((int)targetPosition.x, (int)targetPosition.y, miner);
+        for (int i = 0; i < path.Count; i++)
+        {
+            Debug.DrawLine(new Vector3(path[i].x, path[i].y), new Vector3(path[i + 1].x, path[i + 1].y), Color.red, 2, false);
+        }
+    }
+
+    public override void Execute(Miner miner)
+    {
+        if (path.Count > 0)
+        {
+            Vector2 nextPosition = new Vector2(path[0].x, path[0].y);
+            //miner.GetComponent<Transform>().position = miner.CurrentPosition;
+            miner.GetComponent<Transform>().position = Vector3.Lerp(miner.CurrentPosition, nextPosition, 15f);
+            miner.CurrentPosition = nextPosition;
+            path.RemoveAt(0);
+        }
+        else
+        {
+            miner.CurrentPosition = targetPosition;
+
+            State<Miner> previousState = miner.StateMachine.PreviousState;
+            miner.StateMachine.ChangeState(targetState);
+            miner.StateMachine.PreviousState = previousState;
+        }
+    }
+
+    public override void Exit(Miner miner)
+    {
+        path.Clear();
+    }
+
+    public override bool OnMesssage(Miner agent, Telegram telegram)
+    {
+        return false;
+    }
+
+    public override bool OnSenseEvent(Miner agent, Sense sense)
+    {
+        return false;
     }
 
     public List<Node> GeneratePathForMiner(int x, int y, Miner miner)
@@ -89,50 +143,5 @@ public class MinerTravelToTarget : TravelToTarget<Miner>
         currentPath.Reverse();
 
         return currentPath;
-    }
-
-    public override void Enter(Miner miner)
-    {
-        path = GeneratePathForMiner((int)targetPosition.x, (int)targetPosition.y, miner);
-    }
-
-    public override void Execute(Miner miner)
-    {
-        if (path.Count > 0)
-        {
-            //for (int i = 0; i < path.Count; ++i)
-            //{
-            //    path[i].TintColor = Color.Blue;
-            //    path[i].TintAlpha = 0.5f;
-            //}
-
-            miner.CurrentPosition = new Vector2(path[0].x, path[0].y);
-            miner.GetComponent<Transform>().position = miner.CurrentPosition;
-            path.RemoveAt(0);
-        }
-        else
-        {
-            miner.CurrentPosition = targetPosition;
-
-            State<Miner> previousState = miner.StateMachine.PreviousState;
-            miner.StateMachine.ChangeState(targetState);
-            miner.StateMachine.PreviousState = previousState;
-        }
-    }
-
-    public override void Exit(Miner miner)
-    {
-		Debug.Log (path.Count);
-        path.Clear();
-    }
-
-    public override bool OnMesssage(Miner agent, Telegram telegram)
-    {
-        return false;
-    }
-
-    public override bool OnSenseEvent(Miner agent, Sense sense)
-    {
-        return false;
     }
 }

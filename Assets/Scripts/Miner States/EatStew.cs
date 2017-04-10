@@ -1,11 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EatStew : State<Miner>
 {
+    static readonly EatStew instance = new EatStew();
+
+    public static EatStew Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
+
+    static EatStew() { }
+    private EatStew() { }
+
     public override void Enter(Miner miner)
     {
         Debug.Log("Smells Reaaal goood Elsa!");

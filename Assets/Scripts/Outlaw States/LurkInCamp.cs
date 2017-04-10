@@ -1,40 +1,51 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-public sealed class LurkInCamp : State<Outlaw> {
+public class LurkInCamp : State<Outlaw>
+{
+    static readonly LurkInCamp instance = new LurkInCamp();
 
-	static readonly LurkInCamp instance = new LurkInCamp();
+    public static LurkInCamp Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
 
-	public static LurkInCamp Instance {
-		get {
-			return instance;
-		}
-	}
+    static LurkInCamp() { }
+    private LurkInCamp() { }
 
-	static LurkInCamp () {}
-	private LurkInCamp () {}
+    static System.Random rand = new System.Random();
 
-	public override void Enter (Outlaw agent) {
-		Debug.Log("Outlaw is going to lurk in camp");
-	}
+    public override void Enter(Outlaw outlaw)
+    {
+        Debug.Log("Back home, sweet home!");
 
-	public override void Execute (Outlaw agent) {
-		agent.CreateTime();
-		Debug.Log("Outlaw lurking in camp");
-		agent.ChangeState(LurkInCemetery.Instance);
-	}
+        outlaw.BoredomCountdown = rand.Next(1, 10);
+    }
 
-	public override void Exit (Outlaw agent) {
-		Debug.Log("Outlaw stopped lurking in camp");
-	}
+    public override void Execute(Outlaw outlaw)
+    {
+        Debug.Log("Chilling in " + outlaw.StateMachine.CurrentState.ToString() + ".");
+
+        if (outlaw.Bored())
+        {
+            outlaw.StateMachine.ChangeState(new OutlawTravelToTarget(Tiles.Cemetery, LurkInCemetery.Instance, outlaw));
+        }
+    }
+
+    public override void Exit(Outlaw outlaw)
+    {
+        Debug.Log("Leaving the camp.");
+    }
 
     public override bool OnMesssage(Outlaw agent, Telegram telegram)
     {
-        throw new NotImplementedException();
+        return false;
     }
 
     public override bool OnSenseEvent(Outlaw agent, Sense sense)
     {
-        throw new NotImplementedException();
+        return false;
     }
 }
